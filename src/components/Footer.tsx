@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { Phone, Mail, MapPin, ArrowRight } from "lucide-react";
 
 const SocialIcons = {
@@ -71,19 +72,13 @@ export default function Footer() {
         {/* Brand */}
         <div className="lg:col-span-1">
           <div className="flex items-center gap-3 mb-6">
-            <div
-              className="w-10 h-10 rounded-xl flex items-center justify-center font-black text-lg"
-              style={{
-                background: "linear-gradient(135deg, #550000, #c9a84c)",
-              }}
-            >
-              A4
-            </div>
-            <div>
-              <div className="font-black text-xl">A4 TOURS</div>
-              <div className="text-xs text-white/50 tracking-widest">
-                TRAVEL & EXPERIENCES
-              </div>
+            <div className="relative w-32 h-10 transition-all duration-300">
+              <Image
+                src="/logo.png"
+                alt="A4 Tours Logo"
+                fill
+                className="object-contain"
+              />
             </div>
           </div>
           <p className="text-white/60 text-sm leading-relaxed mb-6">

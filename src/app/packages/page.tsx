@@ -13,6 +13,7 @@ import {
   Users,
   ChevronDown,
   Info,
+  X,
 } from "lucide-react";
 import { packages, categories, badgeColors, Package } from "@/data/packages";
 
@@ -135,6 +136,7 @@ export default function PackagesPage() {
   const [activeCategory, setActiveCategory] = useState("All");
   const [searchQuery, setSearchQuery] = useState("");
   const [sortBy, setSortBy] = useState("default");
+  const [isFilterExpanded, setIsFilterExpanded] = useState(false);
 
   const filtered = packages
     .filter((p) => {
@@ -175,56 +177,85 @@ export default function PackagesPage() {
       </section>
 
       {/* Filters Sticky Bar */}
-      <section className="sticky top-20 z-40 bg-white/90 backdrop-blur-md shadow-sm border-b border-gray-100 py-4">
+      <section className="sticky top-20 z-40 bg-white/95 backdrop-blur-md shadow-sm border-b border-gray-100 py-3 md:py-4 transition-all duration-300">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="flex flex-col md:flex-row items-center gap-4">
-            {/* Search */}
-            <div className="relative flex-1 w-full">
-              <Search size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400" />
-              <input
-                type="text"
-                placeholder="Search tours, locations..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-10 pr-4 py-2.5 rounded-full border border-gray-200 text-sm focus:outline-none focus:border-[#550000] focus:ring-1 focus:ring-[#550000]/20 transition-all"
-                id="package-search"
-              />
+          {/* Mobile Toggle Button */}
+          <button
+            onClick={() => setIsFilterExpanded(!isFilterExpanded)}
+            className="md:hidden w-full flex items-center justify-between px-5 py-2.5 rounded-full border border-gray-200 bg-white text-sm font-bold text-gray-700 hover:border-[#550000]/30 transition-all mb-2"
+          >
+            <div className="flex items-center gap-2">
+              <Filter size={16} className={isFilterExpanded ? "text-[#550000]" : "text-gray-500"} />
+              {isFilterExpanded ? "Hide Filters" : "Filter & Search Packages"}
+            </div>
+            {isFilterExpanded ? <X size={16} /> : <ChevronDown size={16} className="text-gray-400" />}
+          </button>
+
+          {/* Collapsible Content Container */}
+          <div className={`
+            ${isFilterExpanded ? "max-h-[500px] opacity-100 mt-4 mb-2" : "max-h-0 md:max-h-[500px] opacity-0 md:opacity-100 overflow-hidden md:overflow-visible"}
+            transition-all duration-500 ease-in-out md:mt-0 md:mb-0
+          `}>
+            <div className="flex flex-col md:flex-row items-center gap-4">
+              {/* Search */}
+              <div className="relative flex-1 w-full">
+                <Search size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400" />
+                <input
+                  type="text"
+                  placeholder="Search tours, locations..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="w-full pl-10 pr-4 py-2.5 rounded-full border border-gray-200 text-sm focus:outline-none focus:border-[#550000] focus:ring-1 focus:ring-[#550000]/20 transition-all"
+                  id="package-search"
+                />
+              </div>
+
+              {/* Sort */}
+              <div className="flex items-center gap-2 shrink-0 w-full md:w-auto">
+                <span className="text-xs font-semibold text-gray-400 md:hidden uppercase tracking-wider ml-1">Sort By</span>
+                <div className="relative flex-1 md:flex-none">
+                  <Filter size={14} className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none" />
+                  <select
+                    value={sortBy}
+                    onChange={(e) => setSortBy(e.target.value)}
+                    className="w-full md:w-[200px] pl-10 pr-4 py-2.5 text-sm border border-gray-200 rounded-full focus:outline-none focus:border-[#550000] bg-white text-gray-700 cursor-pointer appearance-none transition-all"
+                    id="package-sort"
+                  >
+                    <option value="default">Default Sorting</option>
+                    <option value="price-asc">Price: Low to High</option>
+                    <option value="price-desc">Price: High to Low</option>
+                    <option value="rating">Highest Rated</option>
+                  </select>
+                  <ChevronDown size={14} className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none" />
+                </div>
+              </div>
             </div>
 
-            {/* Sort */}
-            <div className="flex items-center gap-2 shrink-0">
-              <Filter size={14} className="text-gray-400" />
-              <select
-                value={sortBy}
-                onChange={(e) => setSortBy(e.target.value)}
-                className="text-sm border border-gray-200 rounded-full px-4 py-2.5 focus:outline-none focus:border-[#550000] bg-white text-gray-600 cursor-pointer"
-                id="package-sort"
-              >
-                <option value="default">Default Sorting</option>
-                <option value="price-asc">Price: Low to High</option>
-                <option value="price-desc">Price: High to Low</option>
-                <option value="rating">Highest Rated</option>
-              </select>
+            {/* Category Pills */}
+            <div className="mt-4 border-t border-gray-50 pt-4 md:border-none md:pt-0">
+               <span className="text-[10px] font-bold text-gray-400 md:hidden uppercase tracking-[0.2em] mb-3 block ml-1">Categories</span>
+              <div className="flex gap-2 flex-wrap md:flex-nowrap overflow-x-auto pb-2 no-scrollbar">
+                {categories.map((cat) => (
+                  <button
+                    key={cat}
+                    onClick={() => {
+                      setActiveCategory(cat);
+                      // Auto-collapse on mobile after selection if desired, but maybe keep open for refine
+                    }}
+                    className="px-5 py-2.5 rounded-full text-xs font-bold transition-all duration-300 whitespace-nowrap border"
+                    style={{
+                      background: activeCategory === cat ? "#550000" : "white",
+                      borderColor: activeCategory === cat ? "#550000" : "#eee",
+                      color: activeCategory === cat ? "white" : "#666",
+                      boxShadow: activeCategory === cat ? "0 4px 12px rgba(85,0,0,0.15)" : "none",
+                    }}
+                    id={`category-${cat.toLowerCase().replace(" ", "-")}`}
+                  >
+                    {cat}
+                  </button>
+                ))}
+              </div>
             </div>
-          </div>
-
-          {/* Category Pills */}
-          <div className="flex gap-2 mt-4 flex-wrap overflow-x-auto pb-1 no-scrollbar">
-            {categories.map((cat) => (
-              <button
-                key={cat}
-                onClick={() => setActiveCategory(cat)}
-                className="px-5 py-2 rounded-full text-sm font-bold transition-all duration-300 whitespace-nowrap"
-                style={{
-                  background: activeCategory === cat ? "#550000" : "#f5f5f5",
-                  color: activeCategory === cat ? "white" : "#555",
-                  boxShadow: activeCategory === cat ? "0 4px 12px rgba(85,0,0,0.2)" : "none",
-                }}
-                id={`category-${cat.toLowerCase().replace(" ", "-")}`}
-              >
-                {cat}
-              </button>
-            ))}
           </div>
         </div>
       </section>

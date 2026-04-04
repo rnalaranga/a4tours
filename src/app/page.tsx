@@ -285,12 +285,14 @@ export default function HomePage() {
     <>
       {/* ── HERO ── */}
       <section className="relative min-h-screen flex items-center overflow-hidden">
-        {/* Background shimmer placeholder */}
+        {/* Background Image */}
         <div
           style={{
             position: "absolute",
             inset: 0,
-            background: "linear-gradient(135deg, #f0e8e8 0%, #e8d0d0 50%, #f0e8e8 100%)",
+            backgroundImage: "url('/images/hero-sigiriya.jpg')",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
           }}
         />
         {/* Dark overlay */}
@@ -340,7 +342,7 @@ export default function HomePage() {
                   backgroundClip: "text",
                 }}
               >
-                World With Us
+                Sri Lanka With Us
               </span>
             </h1>
 

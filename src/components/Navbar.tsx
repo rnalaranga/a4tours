@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import Image from "next/image";
 import { Menu, X, Phone } from "lucide-react";
 
 const navLinks = [
@@ -34,38 +35,17 @@ export default function Navbar() {
     >
       <div className="max-w-7xl mx-auto px-4 md:px-6 py-3 md:py-4 flex items-center justify-between">
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-2 md:gap-3 group shrink-0">
-          <div
-            className="w-8 h-8 md:w-10 md:h-10 rounded-lg md:rounded-xl flex items-center justify-center font-black text-base md:text-lg transition-all duration-300 group-hover:scale-105"
-            style={{
-              background:
-                scrolled || !isHome
-                  ? "linear-gradient(135deg, #550000, #c9a84c)"
-                  : "rgba(255,255,255,0.2)",
-              color: logoColor,
-              border: `1.5px solid ${scrolled || !isHome ? "transparent" : "rgba(255,255,255,0.4)"}`,
-            }}
-          >
-            A4
-          </div>
-          <div className="flex flex-col">
-            <div
-              className="font-black text-lg md:text-xl leading-none tracking-tight transition-colors duration-300"
-              style={{ color: logoColor }}
-            >
-              A4 TOURS
-            </div>
-            <div
-              className="text-[9px] md:text-xs font-bold tracking-[0.15em] transition-colors duration-300 mt-0.5"
-              style={{
-                color:
-                  scrolled || !isHome
-                    ? "rgba(85,0,0,0.6)"
-                    : "rgba(255,255,255,0.7)",
-              }}
-            >
-              TRAVEL & EXPERIENCES
-            </div>
+        <Link href="/" className="flex items-center gap-2 group shrink-0">
+          <div className="relative w-32 h-10 md:w-40 md:h-12 transition-all duration-300 group-hover:scale-105">
+            <Image
+              src="/logo.png"
+              alt="A4 Tours Logo"
+              fill
+              className={`object-contain transition-all duration-300 ${
+                scrolled || !isHome ? "invert brightness-0" : ""
+              }`}
+              priority
+            />
           </div>
         </Link>
 
