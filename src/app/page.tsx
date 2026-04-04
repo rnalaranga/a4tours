@@ -284,128 +284,127 @@ export default function HomePage() {
   return (
     <>
       {/* ── HERO ── */}
-      <section className="relative min-h-screen flex items-center overflow-hidden">
-        {/* Background Image */}
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+        {/* Full-width Background Image with Parallax-ready feel */}
         <div
           style={{
             position: "absolute",
             inset: 0,
             backgroundImage: "url('/images/hero-sigiriya.jpg')",
             backgroundSize: "cover",
-            backgroundPosition: "center",
+            backgroundPosition: "center 30%",
           }}
+          className="scale-105"
         />
-        {/* Dark overlay */}
+        
+        {/* Sophisticated Boutique Gradient Overlay */}
         <div
           style={{
             position: "absolute",
             inset: 0,
             background:
-              "linear-gradient(135deg, rgba(85,0,0,0.92) 0%, rgba(26,0,0,0.88) 50%, rgba(0,0,0,0.80) 100%)",
+              "radial-gradient(circle at 70% 30%, rgba(0,0,0,0) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0.85) 100%)",
             zIndex: 1,
           }}
         />
 
-        {/* Hero Content */}
-        <div className="relative z-10 max-w-7xl mx-auto px-6 pt-24 pb-16 w-full">
-          <div className="max-w-3xl">
+        {/* Dynamic Hero Content */}
+        <div className="relative z-10 max-w-7xl mx-auto px-6 flex flex-col items-center text-center">
+          <div className="max-w-4xl space-y-8">
             <div
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold mb-6"
+              className="inline-flex items-center gap-2 px-5 py-2 rounded-full text-[10px] font-black uppercase tracking-[0.3em] mb-4"
               style={{
-                background: "rgba(201,168,76,0.2)",
-                border: "1px solid rgba(201,168,76,0.4)",
+                background: "rgba(201,168,76,0.15)",
+                border: "1px solid rgba(201,168,76,0.3)",
                 color: "#c9a84c",
+                backdropFilter: "blur(4px)",
                 opacity: heroLoaded ? 1 : 0,
                 transform: heroLoaded ? "translateY(0)" : "translateY(20px)",
                 transition: "all 0.8s ease 0.1s",
               }}
             >
-              <Compass size={14} />
-              Sri Lanka&apos;s #1 Tour Operator
+              <Compass size={12} className="animate-spin-slow" />
+              Sri Lanka&apos;s Boutique Collection
             </div>
 
             <h1
-              className="text-4xl sm:text-5xl md:text-7xl font-black text-white leading-[1.1] mb-6"
+              className="text-5xl sm:text-7xl md:text-8xl font-black text-white leading-[0.95] tracking-tighter"
               style={{
                 opacity: heroLoaded ? 1 : 0,
                 transform: heroLoaded ? "translateY(0)" : "translateY(30px)",
-                transition: "all 0.8s ease 0.2s",
+                transition: "all 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.2s",
               }}
             >
-              Discover the
+              Unveil the <br/>
               <span
-                className="block"
                 style={{
-                  background: "linear-gradient(135deg, #c9a84c, #f0d080)",
+                  background: "linear-gradient(135deg, #c9a84c 0%, #f0d080 100%)",
                   WebkitBackgroundClip: "text",
                   WebkitTextFillColor: "transparent",
                   backgroundClip: "text",
                 }}
               >
-                Sri Lanka With Us
+                Untold Stories
               </span>
             </h1>
 
             <p
-              className="text-lg md:text-xl text-white/80 mb-10 leading-relaxed max-w-2xl"
+              className="text-lg md:text-2xl text-white/70 max-w-2xl mx-auto leading-relaxed font-medium"
               style={{
                 opacity: heroLoaded ? 1 : 0,
                 transform: heroLoaded ? "translateY(0)" : "translateY(30px)",
-                transition: "all 0.8s ease 0.35s",
+                transition: "all 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.35s",
               }}
             >
-              Curated travel experiences that create lifelong memories. From
-              ancient temples to pristine beaches — let A4 Tours be your guide
-              to Sri Lanka&apos;s wonders.
+              Beyond the landmarks, we curate journeys that connect you with the soul of our island.
             </p>
 
             <div
-              className="flex flex-col sm:flex-row gap-4"
+              className="flex flex-col sm:flex-row gap-5 justify-center pt-4"
               style={{
                 opacity: heroLoaded ? 1 : 0,
                 transform: heroLoaded ? "translateY(0)" : "translateY(30px)",
-                transition: "all 0.8s ease 0.5s",
+                transition: "all 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.5s",
               }}
             >
-              <Link href="/packages" className="btn-gold justify-center">
-                Explore Packages <ArrowRight size={16} />
+              <Link href="/packages" className="btn-gold px-10 py-5 rounded-full text-base shadow-[0_15px_40px_rgba(85,0,0,0.3)]">
+                Explore Packages <ArrowRight size={20} />
               </Link>
-              <Link href="/contact" className="btn-outline justify-center">
-                <Play size={14} /> Plan My Trip
+              <Link href="/contact" className="btn-outline px-10 py-5 rounded-full text-base border-white/20 hover:border-white/40">
+                Contact Our Experts
               </Link>
-            </div>
-
-            {/* Trust indicators */}
-            <div
-              className="flex flex-wrap items-center gap-x-6 gap-y-3 mt-10 pt-10 border-t border-white/20"
-              style={{
-                opacity: heroLoaded ? 1 : 0,
-                transition: "all 0.8s ease 0.65s",
-              }}
-            >
-              {[
-                { label: "5000+ Happy Clients" },
-                { label: "15+ Years Trusted" },
-                { label: "50+ Packages" },
-              ].map((it, i) => (
-                <div key={i} className="flex items-center gap-2">
-                  <CheckCircle size={14} className="text-[#c9a84c] shrink-0" />
-                  <span className="text-white/80 text-xs md:text-sm font-medium">
-                    {it.label}
-                  </span>
-                </div>
-              ))}
             </div>
           </div>
         </div>
 
-        {/* Scroll hint */}
-        <div
-          className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-white/50"
-          style={{ animation: "float 2s ease-in-out infinite" }}
+        {/* Authenticity Badge - Left Corner */}
+        <div 
+          className="absolute bottom-12 left-12 z-20 hidden md:flex items-center gap-4 p-4 rounded-2xl bg-black/20 backdrop-blur-md border border-white/10"
+          style={{
+             opacity: heroLoaded ? 1 : 0,
+             transform: heroLoaded ? "translateX(0)" : "translateX(-40px)",
+             transition: "all 1s ease 0.8s",
+          }}
         >
-          <div className="w-px h-10 bg-white/30" />
-          <span className="text-xs tracking-widest">SCROLL</span>
+          <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-[#c9a84c]">
+              <div className="w-full h-full bg-gray-200 flex items-center justify-center text-gray-500 font-bold text-xs uppercase">A4</div>
+          </div>
+          <div>
+            <div className="text-white text-sm font-bold">Local Expertise</div>
+            <div className="text-white/50 text-[10px] uppercase font-bold tracking-widest leading-none">Registered Tour Agency</div>
+          </div>
+        </div>
+
+        {/* Minimalist Scroll Hint */}
+        <div
+          className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 text-white/30"
+          style={{ 
+             opacity: heroLoaded ? 1 : 0,
+             transition: "all 1s ease 1s"
+          }}
+        >
+          <span className="text-[10px] font-black tracking-[0.4em] uppercase">Begin Your Journey</span>
+          <div className="w-px h-12 bg-gradient-to-b from-white/40 to-transparent" />
         </div>
       </section>
 
