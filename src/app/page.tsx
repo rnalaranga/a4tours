@@ -16,7 +16,10 @@ import {
   Play,
   CheckCircle,
   PhoneCall,
+  Car,
+  Leaf,
 } from "lucide-react";
+import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 
 /* ── helpers ─────────────────────────────────────── */
 function useInView(threshold = 0.15) {
@@ -454,15 +457,30 @@ export default function HomePage() {
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
-    // Trigger on mount
     handleScroll();
-
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   return (
     <>
-      {/* ── HERO ── */}
+      {/* ── DRIVING TRIP OVERLAYS (Wayfinding & Parallax Flora) ── */}
+      <div className="fixed inset-0 pointer-events-none z-[100] overflow-hidden">
+        {/* The Wayfinding Road Line */}
+        <div className="absolute left-4 md:left-12 top-0 bottom-0 w-[2px] opacity-10">
+          <div className="h-full w-full bg-gradient-to-b from-transparent via-gray-400 to-transparent flex flex-col justify-between py-24">
+             {Array.from({ length: 40 }).map((_, i) => (
+               <div key={i} className="w-full h-8 bg-gray-400/30 rounded-full" />
+             ))}
+          </div>
+        </div>
+
+        {/* The Journey Marker (SUV Icon) */}
+        <JourneyMarker />
+
+        {/* Foreground Parallax Flora (Tilted Leaves) */}
+        <ParallaxFlora />
+      </div>
+
       <section data-theme-color="#550000" className="relative min-h-screen flex items-center justify-center overflow-hidden">
         {/* ── Cinematic Ken Burns Slideshow ── */}
         <style dangerouslySetInnerHTML={{
@@ -1388,6 +1406,54 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+    </>
+  );
+}
+/* ── JOURNEY MARKER (SUV icon) ── */
+function JourneyMarker() {
+  const { scrollYProgress } = useScroll();
+  const y = useTransform(scrollYProgress, [0, 1], ["5vh", "95vh"]);
+  const smoothY = useSpring(y, { stiffness: 100, damping: 30, restDelta: 0.001 });
+
+  return (
+    <motion.div
+      style={{ y: smoothY }}
+      className="absolute left-4 md:left-12 -translate-x-1/2 flex flex-col items-center gap-2"
+    >
+      <div className="w-8 h-8 md:w-10 md:h-10 bg-[#c9a84c] rounded-full flex items-center justify-center shadow-lg shadow-[#c9a84c]/20 border border-white/20">
+        <Car size={18} className="text-[#550000]" />
+      </div>
+      <div className="h-12 w-[1px] bg-gradient-to-b from-[#c9a84c] to-transparent" />
+    </motion.div>
+  );
+}
+
+/* ── PARALLAX FLORA ── */
+function ParallaxFlora() {
+  const { scrollYProgress } = useScroll();
+  
+  // Left Leaf (Moves Faster)
+  const y1 = useTransform(scrollYProgress, [0, 1], [0, -1000]);
+  const rotate1 = useTransform(scrollYProgress, [0, 1], [-20, 20]);
+  
+  // Right Leaf (Moves Moderate)
+  const y2 = useTransform(scrollYProgress, [0, 1], [0, -600]);
+  const rotate2 = useTransform(scrollYProgress, [0, 1], [10, -30]);
+
+  return (
+    <>
+      <motion.div
+        style={{ y: y1, rotate: rotate1 }}
+        className="absolute -left-20 top-1/4 w-80 h-80 opacity-40 blur-[8px] md:blur-[12px] mix-blend-overlay rotate-[-15deg]"
+      >
+        <img src="/images/tropical_leaf_parallax_1775411981478.png" className="w-full h-full object-contain" alt="" />
+      </motion.div>
+      <motion.div
+        style={{ y: y2, rotate: rotate2 }}
+        className="absolute -right-24 bottom-1/4 w-96 h-96 opacity-30 blur-[15px] md:blur-[25px] mix-blend-overlay rotate-[35deg]"
+      >
+        <img src="/images/tropical_leaf_parallax_1775411981478.png" className="w-full h-full object-contain scale-x-[-1]" alt="" />
+      </motion.div>
     </>
   );
 }
