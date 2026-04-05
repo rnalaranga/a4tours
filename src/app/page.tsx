@@ -395,10 +395,38 @@ export default function HomePage() {
   const { ref: galleryRef, inView: galleryInView } = useInView(0.1);
   const { ref: blogRef, inView: blogInView } = useInView(0.1);
 
+  // Dynamic Theme Color Observer
+  useEffect(() => {
+    const handleScroll = () => {
+      const sections = document.querySelectorAll<HTMLElement>('[data-theme-color]');
+      const scrollCenter = window.scrollY + window.innerHeight / 3;
+
+      let activeColor = "#111111"; // Default to dark for Hero
+      sections.forEach(sec => {
+         const top = sec.offsetTop;
+         const bottom = top + sec.offsetHeight;
+         if (scrollCenter >= top && scrollCenter <= bottom) {
+            activeColor = sec.getAttribute('data-theme-color') || activeColor;
+         }
+      });
+
+      const metaThemeColor = document.querySelector('meta[name="theme-color"]');
+      if (metaThemeColor && metaThemeColor.getAttribute('content') !== activeColor) {
+         metaThemeColor.setAttribute('content', activeColor);
+      }
+    };
+    
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    // Trigger on mount
+    handleScroll();
+    
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
     <>
       {/* ── HERO ── */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      <section data-theme-color="#111111" className="relative min-h-screen flex items-center justify-center overflow-hidden">
         {/* Full-width Background Image with Parallax-ready feel */}
         <div
           style={{
@@ -523,7 +551,7 @@ export default function HomePage() {
       </section>
 
       {/* ── STATS ── */}
-      <section className="py-24 bg-white">
+      <section data-theme-color="#ffffff" className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-12 border-t border-gray-100 pt-16">
             {stats.map((s, i) => (
@@ -534,7 +562,7 @@ export default function HomePage() {
       </section>
 
       {/* ── DISCOVERY (COLOR RICH SPLIT) ── */}
-      <section className="relative py-32 bg-gradient-to-br from-[#051320] via-[#0a2342] to-[#040e18] overflow-hidden" ref={discoveryRef}>
+      <section data-theme-color="#051320" className="relative py-32 bg-gradient-to-br from-[#051320] via-[#0a2342] to-[#040e18] overflow-hidden" ref={discoveryRef}>
         {/* Decorative Background Image Overlay for mobile fullness */}
         <div className="absolute inset-0 opacity-[0.25]">
           {/* The user should place dest-kandy.jpg or any nice bg here */}
@@ -617,7 +645,7 @@ export default function HomePage() {
       </section>
 
       {/* ── FEATURED PACKAGES ── */}
-      <section className="py-24 bg-[#fafafa]">
+      <section data-theme-color="#fafafa" className="py-24 bg-[#fafafa]">
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16">
             <div className="max-w-xl">
@@ -639,7 +667,7 @@ export default function HomePage() {
       </section>
 
       {/* ── WHY CHOOSE US (BENTO GRID) ── */}
-      <section className="py-32 bg-white" ref={whyRef}>
+      <section data-theme-color="#ffffff" className="py-32 bg-white" ref={whyRef}>
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex flex-col gap-6">
 
@@ -757,7 +785,7 @@ export default function HomePage() {
       </section>
 
       {/* ── AYURVEDA WELLNESS ── */}
-      <section className="py-32 bg-[#faf8f5] relative overflow-hidden">
+      <section data-theme-color="#faf8f5" className="py-32 bg-[#faf8f5] relative overflow-hidden">
         {/* Subtle decorative leaf/nature accent */}
         <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-[#f0ede6] rounded-full blur-3xl opacity-50 -translate-y-1/2 translate-x-1/3 pointer-events-none" />
         <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-[#e8efe9] rounded-full blur-3xl opacity-40 translate-y-1/3 -translate-x-1/4 pointer-events-none" />
@@ -817,7 +845,7 @@ export default function HomePage() {
       </section>
 
       {/* ── BEACH PARALLAX ── */}
-      <section className="relative py-40 min-h-[70vh] flex items-center justify-center overflow-hidden">
+      <section data-theme-color="#111111" className="relative py-40 min-h-[70vh] flex items-center justify-center overflow-hidden">
         {/* Parallax Background */}
         <div
           className="absolute inset-0 bg-fixed bg-cover bg-center"
@@ -848,7 +876,7 @@ export default function HomePage() {
       </section>
 
       {/* ── TRAVELLER MEMORIES (CINEMATIC MARQUEE) ── */}
-      <section className="py-32 bg-[#111111] overflow-hidden relative border-b border-white/5">
+      <section data-theme-color="#111111" className="py-32 bg-[#111111] overflow-hidden relative border-b border-white/5">
         {/* Background Typography */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full text-center pointer-events-none opacity-[0.02] select-none">
           <h2 className="text-[15vw] font-black text-white leading-none whitespace-nowrap">UNFORGETTABLE</h2>
@@ -914,7 +942,7 @@ export default function HomePage() {
       </section>
 
       {/* ── TESTIMONIALS ── */}
-      <section className="py-32 bg-[#550000] relative overflow-hidden" ref={testRef}>
+      <section data-theme-color="#550000" className="py-32 bg-[#550000] relative overflow-hidden" ref={testRef}>
         {/* Decorative Blur */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-[radial-gradient(circle_at_center,rgba(201,168,76,0.1),transparent_70%)]" />
 
@@ -978,7 +1006,7 @@ export default function HomePage() {
       </section>
 
       {/* ── DESTINATIONS ── */}
-      <section className="py-32 bg-white">
+      <section data-theme-color="#ffffff" className="py-32 bg-white">
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex flex-col md:flex-row items-end justify-between gap-8 mb-16">
             <div className="max-w-xl">
@@ -1037,7 +1065,7 @@ export default function HomePage() {
       </section>
 
       {/* ── GALLERY ── */}
-      <section className="py-32 bg-white" ref={galleryRef}>
+      <section data-theme-color="#ffffff" className="py-32 bg-white" ref={galleryRef}>
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-16 space-y-4">
             <span className="text-[10px] font-black tracking-[0.3em] uppercase text-[#c9a84c]">Visual Narratives</span>
@@ -1076,7 +1104,7 @@ export default function HomePage() {
       </section>
 
       {/* ── BLOG SECTION ── */}
-      <section className="py-24 bg-[#fafafa]" ref={blogRef}>
+      <section data-theme-color="#fafafa" className="py-24 bg-[#fafafa]" ref={blogRef}>
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16">
             <div className="max-w-xl">
@@ -1126,7 +1154,7 @@ export default function HomePage() {
       </section>
 
       {/* ── FINAL CTA ── */}
-      <section className="py-24 px-6 bg-white overflow-hidden">
+      <section data-theme-color="#ffffff" className="py-24 px-6 bg-white overflow-hidden">
         <div
           className="max-w-7xl mx-auto rounded-[3rem] relative overflow-hidden p-12 md:p-24 text-center"
           style={{
