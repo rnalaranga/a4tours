@@ -756,6 +756,66 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* ── AYURVEDA WELLNESS ── */}
+      <section className="py-32 bg-[#faf8f5] relative overflow-hidden">
+        {/* Subtle decorative leaf/nature accent */}
+        <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-[#f0ede6] rounded-full blur-3xl opacity-50 -translate-y-1/2 translate-x-1/3 pointer-events-none" />
+        <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-[#e8efe9] rounded-full blur-3xl opacity-40 translate-y-1/3 -translate-x-1/4 pointer-events-none" />
+
+        <div className="max-w-7xl mx-auto px-6 relative z-10">
+          <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
+            
+            {/* Left Image Column */}
+            <div className="relative group">
+               <div className="aspect-[4/5] rounded-t-[5rem] rounded-b-3xl overflow-hidden shadow-2xl relative z-10 border border-white">
+                  <img 
+                    src="/images/ayurveda-main.jpg" 
+                    alt="Sri Lanka Ayurveda" 
+                    className="w-full h-full object-cover transition-transform duration-[2s] group-hover:scale-105"
+                  />
+                  {/* Subtle calm overlay */}
+                  <div className="absolute inset-0 bg-[#354f3b]/10 mix-blend-overlay transition-opacity duration-700 opacity-50 group-hover:opacity-0" />
+               </div>
+               {/* Floating accent card */}
+               <div className="absolute -bottom-8 -right-8 bg-white p-6 rounded-[2rem] shadow-[0_20px_50px_rgba(0,0,0,0.05)] border border-gray-50 z-20 hidden md:block">
+                  <div className="flex items-center gap-4">
+                     <div className="w-12 h-12 bg-[#e8efe9] rounded-full flex items-center justify-center text-[#354f3b]">
+                        <Star size={20} className="fill-[#354f3b] opacity-50" />
+                     </div>
+                     <div>
+                        <div className="text-xl font-black text-gray-900">100%</div>
+                        <div className="text-[10px] font-black uppercase tracking-widest text-gray-400">Natural Healing</div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+
+            {/* Right Text Column */}
+            <div className="space-y-8 md:pl-8">
+               <div className="space-y-4">
+                  <span className="text-[10px] font-black tracking-[0.4em] uppercase text-[#738f79]">Wholistic Wellness</span>
+                  <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-[#2e2b26] leading-[1.1]">
+                     Restore Body, <br/>Mind & Soul
+                  </h2>
+               </div>
+               
+               <p className="text-[#5c574f] text-lg leading-relaxed pt-4">
+                  Experience the profound serenity of Sri Lankan Ayurveda. Rooted in 5,000 years of ancient wisdom, our authentic wellness retreats utilize native herbs, natural oils, and expert techniques to completely rejuvenate your spirit.
+               </p>
+               <p className="text-[#8c857b] text-base leading-relaxed">
+                  Whether you seek deep relaxation through a warm Shirodhara oil treatment, a cleansing Panchakarma retreat, or simply a peaceful escape in a jungle spa, we design wellness journeys that bring you back into perfectly natural harmony.
+               </p>
+
+               <div className="pt-6">
+                  <Link href="/packages" className="inline-flex items-center justify-center bg-[#465c4a] text-white px-8 py-4 rounded-full text-sm font-black uppercase tracking-widest hover:bg-[#354f3b] transition-colors shadow-lg shadow-[#465c4a]/20">
+                     Discover Wellness Escapes
+                  </Link>
+               </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* ── BEACH PARALLAX ── */}
       <section className="relative py-40 min-h-[70vh] flex items-center justify-center overflow-hidden">
         {/* Parallax Background */}
