@@ -550,13 +550,37 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── STATS ── */}
+      {/* ── STATS & TRUST ── */}
       <section data-theme-color="#ffffff" className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-12 border-t border-gray-100 pt-16">
-            {stats.map((s, i) => (
-              <StatCard key={s.label} stat={s} index={i} />
-            ))}
+          <div className="border-t border-gray-100 pt-16 flex flex-col lg:flex-row gap-12 items-center justify-between">
+            
+            {/* The Number Stats */}
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-8 md:gap-16 w-full lg:w-auto">
+              {stats.slice(0, 3).map((s, i) => (
+                <StatCard key={s.label} stat={s} index={i} />
+              ))}
+            </div>
+
+            {/* The TripAdvisor Badge */}
+            <div className="w-full lg:w-auto flex justify-center lg:justify-end border-t lg:border-t-0 lg:border-l border-gray-100 pt-8 lg:pt-0 lg:pl-12">
+               <a 
+                 href="https://www.tripadvisor.com/Attraction_Review-g1500185-d3801228-Reviews-A4_Tours-Katunayake_Negombo_Western_Province.html" 
+                 target="_blank" 
+                 rel="noopener noreferrer"
+                 className="group flex items-center gap-6 p-6 rounded-[2rem] bg-gray-50 border border-gray-100 hover:bg-white hover:border-[#34e0a1]/30 hover:shadow-[0_20px_40px_rgba(52,224,161,0.1)] transition-all duration-500 w-full sm:w-auto"
+               >
+                  <div className="space-y-1">
+                     <div className="text-3xl font-black text-gray-900 flex items-center gap-1">4.9 <Star fill="#34e0a1" className="text-[#34e0a1]" size={20} /></div>
+                     <div className="text-[10px] uppercase tracking-widest font-bold text-gray-400">Excellent Reviews</div>
+                  </div>
+                  <div className="w-px h-12 bg-gray-200" />
+                  <div className="w-24 h-12 relative overflow-hidden group-hover:scale-105 transition-transform duration-500">
+                     <img src="/images/tripadvisor-a4tours.png" alt="A4 Tours on TripAdvisor" className="w-full h-full object-contain" />
+                  </div>
+               </a>
+            </div>
+
           </div>
         </div>
       </section>
