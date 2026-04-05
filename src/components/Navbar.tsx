@@ -25,7 +25,7 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const navBg = scrolled || !isHome ? "bg-white shadow-lg" : "bg-transparent";
+  const navBg = scrolled || !isHome ? "bg-white/75 backdrop-blur-lg shadow-md border-b border-white/20" : "bg-transparent";
   const textColor = scrolled || !isHome ? "text-[#550000]" : "text-white";
   const logoColor = scrolled || !isHome ? "#550000" : "#ffffff";
 
@@ -41,9 +41,8 @@ export default function Navbar() {
               src="/logo.png"
               alt="A4 Tours Logo"
               fill
-              className={`object-contain transition-all duration-300 ${
-                scrolled || !isHome ? "invert brightness-0" : ""
-              }`}
+              className={`object-contain transition-all duration-300 ${scrolled || !isHome ? "invert brightness-0" : ""
+                }`}
               priority
             />
           </div>
@@ -97,7 +96,7 @@ export default function Navbar() {
 
       {/* Mobile Menu */}
       <div
-        className={`md:hidden bg-white shadow-2xl transition-all duration-400 overflow-hidden ${menuOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"}`}
+        className={`md:hidden bg-white/90 backdrop-blur-xl shadow-2xl transition-all duration-400 overflow-hidden border-t border-white/20 ${menuOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"}`}
       >
         <div className="px-6 py-4 flex flex-col gap-4">
           {navLinks.map((link) => {
