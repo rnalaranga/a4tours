@@ -14,6 +14,7 @@ import {
   ChevronRight,
   Play,
   CheckCircle,
+  PhoneCall,
 } from "lucide-react";
 
 /* ── helpers ─────────────────────────────────────── */
@@ -532,12 +533,21 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── DISCOVERY ── */}
-      <section className="py-32 bg-white" ref={discoveryRef}>
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="grid lg:grid-cols-2 gap-20 items-center">
+      {/* ── DISCOVERY (COLOR RICH SPLIT) ── */}
+      <section className="relative py-32 bg-[#050505] overflow-hidden" ref={discoveryRef}>
+        {/* Decorative Background Image Overlay for mobile fullness */}
+        <div className="absolute inset-0 opacity-[0.15]">
+          {/* The user should place dest-kandy.jpg or any nice bg here */}
+          <img src="/images/dest-kandy.jpg" className="w-full h-full object-cover blur-sm" alt="Background" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#050505] via-[#050505]/90 to-[#050505]/60" />
+        </div>
+
+        <div className="relative z-10 max-w-7xl mx-auto px-6">
+          <div className="grid lg:grid-cols-12 gap-12 lg:gap-20 items-center">
+
+            {/* Left Content */}
             <div
-              className="space-y-8"
+              className="lg:col-span-5 space-y-10"
               style={{
                 opacity: discoveryInView ? 1 : 0,
                 transform: discoveryInView ? "translateX(0)" : "translateX(-40px)",
@@ -545,33 +555,59 @@ export default function HomePage() {
               }}
             >
               <div className="space-y-4 text-center lg:text-left">
-                <span className="text-[10px] font-black tracking-[0.3em] uppercase text-[#c9a84c]">Infinite Discovery</span>
-                <h2 className="text-4xl md:text-5xl font-black text-gray-900 leading-tight">Sri Lanka: The Pearl <br />of the Indian Ocean</h2>
-                <p className="text-gray-500 text-lg leading-relaxed max-w-xl">From historical heritage and vibrant wildlife to lush green mountains and golden shorelines, Sri Lanka offers a soul-enriching experience for everyone.</p>
+                <span className="text-[10px] font-black tracking-[0.4em] uppercase text-[#c9a84c] drop-shadow-md">Infinite Discovery</span>
+                <h2 className="text-4xl md:text-6xl font-black text-white leading-[1.1]">Sri Lanka: The Pearl <br /><span className="text-transparent bg-clip-text bg-gradient-to-r from-[#c9a84c] to-[#f0d080]">of the Indian Ocean</span></h2>
+                <p className="text-white/70 text-lg leading-relaxed">From historical heritage and vibrant wildlife to lush green mountains and golden shorelines, Sri Lanka offers a soul-enriching experience. Let us craft an itinerary that speaks to your heart.</p>
               </div>
-              <div className="flex flex-col sm:flex-row gap-4 pt-4">
-                <Link href="/about" className="btn-gold px-8 py-3 rounded-full text-xs font-black uppercase tracking-widest">Read Our Story</Link>
+
+              {/* Contact Card Inside Section */}
+              <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-8 flex flex-col sm:flex-row items-center gap-6 group hover:bg-white/10 hover:border-[#c9a84c]/30 transition-all duration-500">
+                <div className="w-16 h-16 shrink-0 rounded-full bg-gradient-to-br from-[#550000] to-[#2a0000] flex items-center justify-center text-white shadow-[0_10px_20px_rgba(85,0,0,0.5)] group-hover:scale-110 transition-transform duration-500">
+                  <PhoneCall size={24} />
+                </div>
+                <div className="text-center sm:text-left">
+                  <h4 className="text-white font-bold text-lg mb-1">Speak to an Expert</h4>
+                  <p className="text-white/50 text-sm mb-3">Get a free consultation for your tour.</p>
+                  <Link href="/contact" className="text-[#c9a84c] text-sm font-black uppercase tracking-widest group-hover:text-white transition-colors flex items-center justify-center sm:justify-start gap-2">Contact Us <ArrowRight size={14} /></Link>
+                </div>
               </div>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 relative">
-              {/* Background Decorative Accent */}
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-gray-50 rounded-full blur-3xl opacity-50 -z-10" />
+            {/* Right Side: Image & Colored Cards grid */}
+            <div className="lg:col-span-7 grid sm:grid-cols-2 gap-6 relative">
+              {/* Large Vertical Image Anchoring the grid */}
+              <div
+                className="sm:row-span-2 rounded-[2.5rem] overflow-hidden relative group aspect-[4/5] sm:aspect-auto shadow-2xl border border-white/10"
+                style={{
+                  opacity: discoveryInView ? 1 : 0,
+                  transform: discoveryInView ? "translateY(0)" : "translateY(40px)",
+                  transition: "all 1s cubic-bezier(0.16, 1, 0.3, 1) 0.2s"
+                }}
+              >
+                {/* The user should place discovery-main.jpg here */}
+                <img src="/images/mask.jpg" alt="Culture Sri Lanka" className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#050505]/90 via-[#050505]/20 to-transparent" />
+                <div className="absolute bottom-8 left-8 right-8">
+                  <div className="text-[#c9a84c] text-[10px] font-black uppercase tracking-widest mb-2 flex items-center gap-2"><Star size={12} className="fill-[#c9a84c]" /> 2500+ Years of History</div>
+                  <div className="text-white font-black text-3xl">Vibrant Culture</div>
+                </div>
+              </div>
 
+              {/* Feature Cards replacing white blocks */}
               {discoveryFeatures.map((feat, i) => (
                 <div
                   key={feat.title}
-                  className={`p-8 rounded-[2.5rem] bg-white border border-gray-100 shadow-[0_15px_50px_rgba(0,0,0,0.03)] space-y-4 hover:shadow-[0_20px_60px_rgba(0,0,0,0.06)] transition-all duration-500 ${i === 2 ? 'sm:col-span-2' : ''}`}
+                  className={`p-8 rounded-[2rem] bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-md border border-white/10 hover:border-[#c9a84c]/50 transition-all duration-500 flex flex-col justify-center gap-4 group ${i === 2 ? 'sm:col-span-2' : ''}`}
                   style={{
                     opacity: discoveryInView ? 1 : 0,
                     transform: discoveryInView ? "translateY(0)" : "translateY(40px)",
-                    transition: `all 1s cubic-bezier(0.16, 1, 0.3, 1) ${0.2 + i * 0.15}s`
+                    transition: `all 1s cubic-bezier(0.16, 1, 0.3, 1) ${0.4 + i * 0.15}s`
                   }}
                 >
-                  <div className="text-5xl">{feat.icon}</div>
-                  <div className="space-y-1">
-                    <h4 className="font-black text-gray-900">{feat.title}</h4>
-                    <p className="text-gray-500 text-xs leading-relaxed">{feat.desc}</p>
+                  <div className="text-4xl w-14 h-14 bg-white/5 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-500">{feat.icon}</div>
+                  <div>
+                    <h4 className="font-black text-white text-xl mb-2">{feat.title}</h4>
+                    <p className="text-white/50 text-sm leading-relaxed">{feat.desc}</p>
                   </div>
                 </div>
               ))}
@@ -753,22 +789,23 @@ export default function HomePage() {
 
       {/* ── TRAVELLER MEMORIES (CINEMATIC MARQUEE) ── */}
       <section className="py-32 bg-[#111111] overflow-hidden relative border-b border-white/5">
-         {/* Background Typography */}
-         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full text-center pointer-events-none opacity-[0.02] select-none">
-            <h2 className="text-[15vw] font-black text-white leading-none whitespace-nowrap">UNFORGETTABLE</h2>
-         </div>
+        {/* Background Typography */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full text-center pointer-events-none opacity-[0.02] select-none">
+          <h2 className="text-[15vw] font-black text-white leading-none whitespace-nowrap">UNFORGETTABLE</h2>
+        </div>
 
-         <div className="relative z-10 max-w-7xl mx-auto px-6 mb-16 flex flex-col md:flex-row md:items-end justify-between gap-6">
-            <div className="space-y-4">
-               <span className="text-[10px] font-black tracking-[0.4em] uppercase text-[#c9a84c]">Smiles & Stories</span>
-               <h2 className="text-4xl md:text-5xl font-black text-white">Traveller Memories</h2>
-            </div>
-            <p className="text-white/50 max-w-sm text-sm">Real moments captured by our guests. Join our growing family of explorers.</p>
-         </div>
+        <div className="relative z-10 max-w-7xl mx-auto px-6 mb-16 flex flex-col md:flex-row md:items-end justify-between gap-6">
+          <div className="space-y-4">
+            <span className="text-[10px] font-black tracking-[0.4em] uppercase text-[#c9a84c]">Smiles & Stories</span>
+            <h2 className="text-4xl md:text-5xl font-black text-white">Traveller Memories</h2>
+          </div>
+          <p className="text-white/50 max-w-sm text-sm">Real moments captured by our guests. Join our growing family of explorers.</p>
+        </div>
 
-         {/* Marquee Container */}
-         <div className="relative w-full overflow-hidden flex pb-8">
-            <style dangerouslySetInnerHTML={{__html: `
+        {/* Marquee Container */}
+        <div className="relative w-full overflow-hidden flex pb-8">
+          <style dangerouslySetInnerHTML={{
+            __html: `
                @keyframes marquee {
                   0% { transform: translateX(0%); }
                   100% { transform: translateX(-50%); }
@@ -782,38 +819,38 @@ export default function HomePage() {
                   animation-play-state: paused;
                }
             `}} />
-            
-            {/* The fading edges for smooth illusion */}
-            <div className="absolute top-0 left-0 w-32 md:w-64 h-full bg-gradient-to-r from-[#111111] to-transparent z-20 pointer-events-none" />
-            <div className="absolute top-0 right-0 w-32 md:w-64 h-full bg-gradient-to-l from-[#111111] to-transparent z-20 pointer-events-none" />
 
-            <div className="animate-marquee gap-6 px-3">
-               {/* We render the list twice to create the infinite loop effect seamlessly */}
-               {[...travelerMemories, ...travelerMemories].map((img, index) => (
-                  <div 
-                    key={index}
-                    className="relative w-72 md:w-96 aspect-[4/5] rounded-[2.5rem] overflow-hidden shrink-0 group border border-white/5 grayscale-[0.5] hover:grayscale-0 transition-all duration-700 hover:shadow-[0_0_40px_rgba(201,168,76,0.15)] cursor-pointer"
-                  >
-                     {/* Temporary placeholder logic if img is missing */}
-                     <div className="absolute inset-0 bg-[#222222] -z-20 flex items-center justify-center">
-                        <Compass size={48} className="text-white opacity-5" />
-                     </div>
-                     <img 
-                       src={img} 
-                       alt={`Traveler Memory ${index + 1}`} 
-                       className="absolute inset-0 w-full h-full object-cover transition-transform duration-[2s] group-hover:scale-110"
-                     />
-                     {/* Overlay */}
-                     <div className="absolute inset-0 bg-[#c9a84c]/20 mix-blend-overlay opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-                     <div className="absolute inset-0 bg-gradient-to-t from-[#111111]/90 via-[#111111]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-8">
-                        <div className="inline-flex items-center gap-2 text-[10px] font-black uppercase text-white tracking-widest bg-white/10 backdrop-blur-md px-4 py-2 rounded-full w-max">
-                           #A4ToursFamily
-                        </div>
-                     </div>
+          {/* The fading edges for smooth illusion */}
+          <div className="absolute top-0 left-0 w-32 md:w-64 h-full bg-gradient-to-r from-[#111111] to-transparent z-20 pointer-events-none" />
+          <div className="absolute top-0 right-0 w-32 md:w-64 h-full bg-gradient-to-l from-[#111111] to-transparent z-20 pointer-events-none" />
+
+          <div className="animate-marquee gap-6 px-3">
+            {/* We render the list twice to create the infinite loop effect seamlessly */}
+            {[...travelerMemories, ...travelerMemories].map((img, index) => (
+              <div
+                key={index}
+                className="relative w-72 md:w-96 aspect-[4/5] rounded-[2.5rem] overflow-hidden shrink-0 group border border-white/5 grayscale-[0.5] hover:grayscale-0 transition-all duration-700 hover:shadow-[0_0_40px_rgba(201,168,76,0.15)] cursor-pointer"
+              >
+                {/* Temporary placeholder logic if img is missing */}
+                <div className="absolute inset-0 bg-[#222222] -z-20 flex items-center justify-center">
+                  <Compass size={48} className="text-white opacity-5" />
+                </div>
+                <img
+                  src={img}
+                  alt={`Traveler Memory ${index + 1}`}
+                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-[2s] group-hover:scale-110"
+                />
+                {/* Overlay */}
+                <div className="absolute inset-0 bg-[#c9a84c]/20 mix-blend-overlay opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#111111]/90 via-[#111111]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-8">
+                  <div className="inline-flex items-center gap-2 text-[10px] font-black uppercase text-white tracking-widest bg-white/10 backdrop-blur-md px-4 py-2 rounded-full w-max">
+                    #A4ToursFamily
                   </div>
-               ))}
-            </div>
-         </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
       </section>
 
       {/* ── TESTIMONIALS ── */}
