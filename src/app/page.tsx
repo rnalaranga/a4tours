@@ -18,8 +18,10 @@ import {
   PhoneCall,
   Car,
   Leaf,
+  X,
+  Send,
 } from "lucide-react";
-import { motion, useScroll, useTransform, useSpring } from "framer-motion";
+import { motion, useScroll, useTransform, useSpring, AnimatePresence } from "framer-motion";
 
 /* ── helpers ─────────────────────────────────────── */
 function useInView(threshold = 0.15) {
@@ -412,6 +414,8 @@ export default function HomePage() {
   const [activeTestimonial, setActiveTestimonial] = useState(0);
   const [heroLoaded, setHeroLoaded] = useState(false);
   const [heroSlide, setHeroSlide] = useState(0);
+  const [showShuttleModal, setShowShuttleModal] = useState(false);
+  const [shuttleData, setShuttleData] = useState({ message: "", contact: "" });
 
   useEffect(() => {
     setTimeout(() => setHeroLoaded(true), 100);
@@ -609,6 +613,26 @@ export default function HomePage() {
               <Link href="/contact" className="btn-outline px-10 py-5 rounded-full text-base border-white/20 hover:border-white/40">
                 Contact Our Experts
               </Link>
+            </div>
+
+            {/* Shuttle Service Feature Button */}
+            <div
+              className="pt-6"
+              style={{
+                opacity: heroLoaded ? 1 : 0,
+                transform: heroLoaded ? "translateY(0)" : "translateY(20px)",
+                transition: "all 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.65s",
+              }}
+            >
+              <button
+                onClick={() => setShowShuttleModal(true)}
+                className="group relative inline-flex items-center gap-4 px-10 py-4 rounded-full text-[12px] font-black uppercase tracking-[0.25em] bg-[#c9a84c] text-[#1a0000] hover:bg-[#b08d3a] transition-all duration-500 shadow-[0_15px_45px_rgba(201,168,76,0.25)] overflow-hidden scale-105 md:scale-100 hover:scale-105 active:scale-95"
+              >
+                <div className="absolute inset-0 bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity" />
+                <div className="w-2.5 h-2.5 rounded-full bg-[#1a0000] animate-pulse" />
+                <span>Drop and Pickup One Way Shuttle</span>
+                <ArrowRight size={16} className="group-hover:translate-x-1.5 transition-transform" />
+              </button>
             </div>
           </div>
         </div>
@@ -1406,13 +1430,88 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* ── SHUTTLE INQUIRY MODAL (AnimatePresence) ── */}
+      <AnimatePresence>
+        {showShuttleModal && (
+          <div className="fixed inset-0 z-[10000] flex items-center justify-center p-6 bg-black/80 backdrop-blur-sm">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.9, y: 20 }}
+              className="relative w-full max-w-lg bg-[#1a0000] border border-white/10 rounded-[2rem] overflow-hidden shadow-2xl"
+              onClick={(e) => e.stopPropagation()}
+            >
+              {/* Modal Background Gradient */}
+              <div className="absolute inset-0 bg-gradient-to-br from-[#550000]/20 to-transparent pointer-events-none" />
+
+              <div className="relative p-8 md:p-10 space-y-6">
+                {/* Close Button */}
+                <button
+                  onClick={() => setShowShuttleModal(false)}
+                  className="absolute top-6 right-6 w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white/50 hover:text-white hover:bg-white/10 transition-all"
+                >
+                  <X size={20} />
+                </button>
+
+                <div className="space-y-2">
+                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#c9a84c]/20 text-[#c9a84c] text-[10px] font-black uppercase tracking-[0.2em] border border-[#c9a84c]/30">
+                    <Car size={12} /> Travel Concierge
+                  </div>
+                  <h3 className="text-3xl font-black text-white">Shuttle Inquiry</h3>
+                  <p className="text-white/60 text-sm">Tell us your destination and contact details for a quick quote.</p>
+                </div>
+
+                <div className="space-y-4">
+                  <div className="space-y-2">
+                    <label className="text-[10px] font-black text-[#c9a84c] uppercase tracking-widest pl-1">Message Details</label>
+                    <textarea
+                      placeholder="e.g. Pickup from Katunayake to Ella on 15th April..."
+                      rows={4}
+                      value={shuttleData.message}
+                      onChange={(e) => setShuttleData({ ...shuttleData, message: e.target.value })}
+                      className="w-full bg-white/5 border border-white/10 rounded-2xl p-4 text-white placeholder:text-white/20 focus:outline-none focus:border-[#c9a84c] transition-colors resize-none"
+                    />
+                  </div>
+
+                  <div className="space-y-2">
+                    <label className="text-[10px] font-black text-[#c9a84c] uppercase tracking-widest pl-1">Contact (WhatsApp / Phone / Email)</label>
+                    <input
+                      type="text"
+                      placeholder="Your contact information..."
+                      value={shuttleData.contact}
+                      onChange={(e) => setShuttleData({ ...shuttleData, contact: e.target.value })}
+                      className="w-full bg-white/5 border border-white/10 rounded-2xl px-4 py-3 text-white placeholder:text-white/20 focus:outline-none focus:border-[#c9a84c] transition-colors"
+                    />
+                  </div>
+
+                  <button
+                    onClick={() => {
+                      const subject = encodeURIComponent("Shuttle Inquiry: Drop and Pickup One Way");
+                      const body = encodeURIComponent(`Inquiry Details:\n${shuttleData.message}\n\nContact Information:\n${shuttleData.contact}`);
+                      window.location.href = `mailto:to@a4tours.net?subject=${subject}&body=${body}`;
+                      setShowShuttleModal(false);
+                    }}
+                    className="w-full btn-gold py-5 rounded-2xl flex items-center justify-center gap-3 font-black text-sm uppercase tracking-[0.15em] shadow-[0_15px_35px_rgba(201,168,76,0.25)]"
+                  >
+                    <Send size={18} />
+                    Send Inquiry
+                  </button>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
     </>
   );
 }
 /* ── JOURNEY MARKER (SUV icon) ── */
 function JourneyMarker() {
   const { scrollYProgress } = useScroll();
-  const y = useTransform(scrollYProgress, [0, 1], ["5vh", "95vh"]);
+  // Start lower on mobile to avoid overlapping the brand logo
+  const startPos = typeof window !== 'undefined' && window.innerWidth < 768 ? "15vh" : "5vh";
+  const y = useTransform(scrollYProgress, [0, 1], [startPos, "95vh"]);
   const smoothY = useSpring(y, { stiffness: 100, damping: 30, restDelta: 0.001 });
 
   return (

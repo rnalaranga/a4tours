@@ -8,13 +8,13 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
 
   useEffect(() => {
     lenisRef.current = new Lenis({
-      duration: 1.5,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      duration: 1, // Snappier response
+      easing: (t) => 1 - Math.pow(1 - t, 4), // Quicker start, smooth end
       orientation: "vertical",
       gestureOrientation: "vertical",
       smoothWheel: true,
-      wheelMultiplier: 1,
-      touchMultiplier: 2,
+      wheelMultiplier: 1.2, // More distance per scroll
+      touchMultiplier: 1.5,
     });
 
     const scroll = (time: number) => {
