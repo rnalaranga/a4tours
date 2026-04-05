@@ -401,7 +401,7 @@ export default function HomePage() {
       const sections = document.querySelectorAll<HTMLElement>('[data-theme-color]');
       const scrollCenter = window.scrollY + window.innerHeight / 3;
 
-      let activeColor = "#111111"; // Default to dark for Hero
+      let activeColor = "#016bb5"; // Default to sky blue for Hero
       sections.forEach(sec => {
          const top = sec.offsetTop;
          const bottom = top + sec.offsetHeight;
@@ -426,7 +426,7 @@ export default function HomePage() {
   return (
     <>
       {/* ── HERO ── */}
-      <section data-theme-color="#111111" className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      <section data-theme-color="#016bb5" className="relative min-h-screen flex items-center justify-center overflow-hidden">
         {/* Full-width Background Image with Parallax-ready feel */}
         <div
           style={{
