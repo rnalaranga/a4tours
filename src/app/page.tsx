@@ -534,12 +534,12 @@ export default function HomePage() {
       </section>
 
       {/* ── DISCOVERY (COLOR RICH SPLIT) ── */}
-      <section className="relative py-32 bg-[#050505] overflow-hidden" ref={discoveryRef}>
+      <section className="relative py-32 bg-gradient-to-br from-[#051320] via-[#0a2342] to-[#040e18] overflow-hidden" ref={discoveryRef}>
         {/* Decorative Background Image Overlay for mobile fullness */}
-        <div className="absolute inset-0 opacity-[0.15]">
+        <div className="absolute inset-0 opacity-[0.25]">
           {/* The user should place dest-kandy.jpg or any nice bg here */}
-          <img src="/images/dest-kandy.jpg" className="w-full h-full object-cover blur-sm" alt="Background" />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#050505] via-[#050505]/90 to-[#050505]/60" />
+          <img src="/images/dest-kandy.jpg" className="w-full h-full object-cover blur-md mix-blend-luminosity" alt="Background" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#051320] via-[#0a2342]/80 to-transparent" />
         </div>
 
         <div className="relative z-10 max-w-7xl mx-auto px-6">
@@ -586,7 +586,7 @@ export default function HomePage() {
               >
                 {/* The user should place discovery-main.jpg here */}
                 <img src="/images/mask.jpg" alt="Culture Sri Lanka" className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#050505]/90 via-[#050505]/20 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0a2342] via-[#0a2342]/40 to-transparent" />
                 <div className="absolute bottom-8 left-8 right-8">
                   <div className="text-[#c9a84c] text-[10px] font-black uppercase tracking-widest mb-2 flex items-center gap-2"><Star size={12} className="fill-[#c9a84c]" /> 2500+ Years of History</div>
                   <div className="text-white font-black text-3xl">Vibrant Culture</div>
