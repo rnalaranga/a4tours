@@ -372,7 +372,7 @@ function StatCard({ stat, index }: { stat: typeof stats[0]; index: number }) {
   return (
     <div
       ref={ref}
-      className="relative p-6 sm:p-8 rounded-[2rem] bg-gray-50/50 border border-gray-100 overflow-hidden group hover:border-[#c9a84c]/30 hover:shadow-[0_15px_40px_rgba(0,0,0,0.04)] transition-all duration-500 w-full"
+      className="relative p-4 sm:p-6 md:p-8 rounded-[1.5rem] sm:rounded-[2rem] bg-gray-50/50 border border-gray-100 overflow-hidden group hover:border-[#c9a84c]/30 hover:shadow-[0_15px_40px_rgba(0,0,0,0.04)] transition-all duration-500 w-full"
       style={{
         opacity: inView ? 1 : 0,
         transform: inView ? "translateY(0)" : "translateY(30px)",
@@ -380,15 +380,16 @@ function StatCard({ stat, index }: { stat: typeof stats[0]; index: number }) {
       }}
     >
       {/* Giant Faded Background Icon */}
-      <Icon className="absolute -bottom-6 -right-6 w-32 h-32 text-gray-900/[0.03] group-hover:scale-110 group-hover:text-[#c9a84c]/[0.05] transition-all duration-700" />
+      <Icon className="absolute -bottom-4 -right-4 w-20 h-20 sm:w-32 sm:h-32 text-gray-900/[0.03] group-hover:scale-110 group-hover:text-[#c9a84c]/[0.05] transition-all duration-700" />
 
-      <div className="relative z-10 flex flex-row sm:flex-col items-center sm:items-start gap-6 sm:gap-0">
-        <div className="w-14 h-14 sm:mb-6 rounded-2xl bg-white shadow-sm border border-gray-100 flex items-center justify-center shrink-0 text-[#550000] group-hover:scale-110 group-hover:bg-[#550000] group-hover:text-white transition-all duration-500">
-          <Icon size={24} />
+      <div className="relative z-10 flex flex-col items-start gap-3">
+        <div className="w-9 h-9 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-white shadow-sm border border-gray-100 flex items-center justify-center shrink-0 text-[#550000] group-hover:scale-110 group-hover:bg-[#550000] group-hover:text-white transition-all duration-500">
+          <Icon size={18} className="sm:hidden" />
+          <Icon size={22} className="hidden sm:block" />
         </div>
         <div>
-          <div className="text-3xl sm:text-4xl font-black text-gray-900 mb-1 leading-none">{stat.value}</div>
-          <div className="text-[10px] sm:text-xs font-bold text-gray-400 uppercase tracking-widest">{stat.label}</div>
+          <div className="text-xl sm:text-3xl md:text-4xl font-black text-gray-900 mb-0.5 leading-none">{stat.value}</div>
+          <div className="text-[9px] sm:text-[10px] md:text-xs font-bold text-gray-400 uppercase tracking-widest leading-tight">{stat.label}</div>
         </div>
       </div>
     </div>
@@ -858,29 +859,29 @@ export default function HomePage() {
       </section>
 
       {/* ── WHY CHOOSE US (BENTO GRID) ── */}
-      <section data-theme-color="#ffffff" className="py-32 bg-white" ref={whyRef}>
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="flex flex-col gap-6">
+      <section data-theme-color="#ffffff" className="py-16 md:py-32 bg-white" ref={whyRef}>
+        <div className="max-w-7xl mx-auto px-4 md:px-6">
+          <div className="flex flex-col gap-4 md:gap-6">
 
             {/* Row 1: Intro & Stat */}
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
               {/* Main Title Block */}
               <div
-                className="lg:col-span-2 bg-[#fafafa] rounded-[3rem] p-12 md:p-16 flex flex-col justify-center border border-gray-100 hover:shadow-[0_20px_50px_rgba(0,0,0,0.03)] transition-all duration-700"
+                className="col-span-2 lg:col-span-2 bg-[#fafafa] rounded-2xl md:rounded-[3rem] p-6 md:p-16 flex flex-col justify-center border border-gray-100"
                 style={{
                   opacity: whyInView ? 1 : 0,
                   transform: whyInView ? "translateY(0)" : "translateY(40px)",
                   transition: "all 0.8s cubic-bezier(0.16, 1, 0.3, 1)"
                 }}
               >
-                <span className="text-[10px] font-black tracking-[0.4em] uppercase text-[#c9a84c] mb-6">Authentic Excellence</span>
-                <h2 className="text-4xl md:text-6xl font-black text-gray-900 leading-[1.1] mb-6">Beyond a Simple <br />Travel Agency</h2>
-                <p className="text-gray-500 text-lg md:text-xl leading-relaxed max-w-2xl">We don&apos;t just book hotels; we architect memories. Every detail is hand-picked to ensure your journey reflects the pure elegance of Sri Lanka.</p>
+                <span className="text-[9px] md:text-[10px] font-black tracking-[0.4em] uppercase text-[#c9a84c] mb-3 md:mb-6">Authentic Excellence</span>
+                <h2 className="text-2xl md:text-6xl font-black text-gray-900 leading-[1.1] mb-3 md:mb-6">Beyond a Simple <br className="hidden md:block" />Travel Agency</h2>
+                <p className="text-gray-500 text-xs md:text-xl leading-relaxed max-w-2xl hidden sm:block">We don&apos;t just book hotels; we architect memories. Every detail is hand-picked to ensure your journey reflects the pure elegance of Sri Lanka.</p>
               </div>
 
               {/* Stat Block */}
               <div
-                className="bg-gradient-to-br from-[#550000] to-[#2a0000] rounded-[3rem] p-12 text-center flex flex-col items-center justify-center text-white relative overflow-hidden group hover:shadow-[0_20px_50px_rgba(85,0,0,0.3)] transition-all duration-700"
+                className="col-span-2 sm:col-span-1 lg:col-span-1 bg-gradient-to-br from-[#550000] to-[#2a0000] rounded-2xl md:rounded-[3rem] p-6 md:p-12 text-center flex flex-col items-center justify-center text-white relative overflow-hidden group hover:shadow-[0_20px_50px_rgba(85,0,0,0.3)] transition-all duration-700"
                 style={{
                   opacity: whyInView ? 1 : 0,
                   transform: whyInView ? "translateY(0)" : "translateY(40px)",
@@ -888,30 +889,30 @@ export default function HomePage() {
                 }}
               >
                 <div className="absolute inset-0 bg-[#000000] opacity-0 group-hover:opacity-20 transition-opacity duration-1000" />
-                <div className="relative z-10 text-6xl md:text-8xl font-black mb-4 group-hover:text-[#c9a84c] transition-colors duration-500">15+</div>
-                <div className="relative z-10 text-[10px] md:text-xs font-black uppercase tracking-[0.3em] text-[#c9a84c] group-hover:text-white transition-colors duration-500">Years of Craftsmanship</div>
+                <div className="relative z-10 text-5xl md:text-8xl font-black mb-2 md:mb-4 group-hover:text-[#c9a84c] transition-colors duration-500">15+</div>
+                <div className="relative z-10 text-[9px] md:text-xs font-black uppercase tracking-[0.3em] text-[#c9a84c]">Years of Craftsmanship</div>
               </div>
             </div>
 
-            {/* Row 2: Features Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {/* Row 2: Features Grid — 2×2 on mobile, 4-col on desktop */}
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
               {/* Feature 1 */}
               <div
-                className="bg-white rounded-[3rem] p-10 border border-gray-100 hover:shadow-[0_20px_50px_rgba(0,0,0,0.06)] hover:-translate-y-2 transition-all duration-500 flex flex-col justify-center"
+                className="bg-white rounded-2xl md:rounded-[3rem] p-5 md:p-10 border border-gray-100 hover:shadow-[0_20px_50px_rgba(0,0,0,0.06)] hover:-translate-y-1 transition-all duration-500 flex flex-col justify-center"
                 style={{
                   opacity: whyInView ? 1 : 0,
                   transform: whyInView ? "translateY(0)" : "translateY(40px)",
                   transition: "all 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.3s"
                 }}
               >
-                <div className="w-14 h-14 shrink-0 rounded-2xl bg-gray-50 flex items-center justify-center text-3xl mb-6">{whyUs[0].icon}</div>
-                <h4 className="font-black text-xl text-gray-900 mb-3">{whyUs[0].title}</h4>
-                <p className="text-gray-500 text-sm leading-relaxed">{whyUs[0].description}</p>
+                <div className="w-10 h-10 md:w-14 md:h-14 shrink-0 rounded-xl md:rounded-2xl bg-gray-50 flex items-center justify-center text-xl md:text-3xl mb-4 md:mb-6">{whyUs[0].icon}</div>
+                <h4 className="font-black text-sm md:text-xl text-gray-900 mb-1 md:mb-3">{whyUs[0].title}</h4>
+                <p className="text-gray-500 text-[11px] md:text-sm leading-relaxed hidden sm:block">{whyUs[0].description}</p>
               </div>
 
-              {/* Centerpiece Logo */}
+              {/* Centerpiece Logo — spans 2 cols on all sizes */}
               <div
-                className="lg:col-span-2 md:col-span-2 rounded-[3rem] overflow-hidden bg-gray-50 relative group border border-gray-100 min-h-[300px]"
+                className="col-span-2 rounded-2xl md:rounded-[3rem] overflow-hidden bg-gray-50 relative group border border-gray-100 min-h-[160px] md:min-h-[300px]"
                 style={{
                   opacity: whyInView ? 1 : 0,
                   transform: whyInView ? "translateY(0)" : "translateY(40px)",
@@ -923,50 +924,50 @@ export default function HomePage() {
 
               {/* Feature 2 */}
               <div
-                className="bg-white rounded-[3rem] p-10 border border-gray-100 hover:shadow-[0_20px_50px_rgba(0,0,0,0.06)] hover:-translate-y-2 transition-all duration-500 flex flex-col justify-center"
+                className="bg-white rounded-2xl md:rounded-[3rem] p-5 md:p-10 border border-gray-100 hover:shadow-[0_20px_50px_rgba(0,0,0,0.06)] hover:-translate-y-1 transition-all duration-500 flex flex-col justify-center"
                 style={{
                   opacity: whyInView ? 1 : 0,
                   transform: whyInView ? "translateY(0)" : "translateY(40px)",
                   transition: "all 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.6s"
                 }}
               >
-                <div className="w-14 h-14 shrink-0 rounded-2xl bg-gray-50 flex items-center justify-center text-3xl mb-6">{whyUs[1].icon}</div>
-                <h4 className="font-black text-xl text-gray-900 mb-3">{whyUs[1].title}</h4>
-                <p className="text-gray-500 text-sm leading-relaxed">{whyUs[1].description}</p>
+                <div className="w-10 h-10 md:w-14 md:h-14 shrink-0 rounded-xl md:rounded-2xl bg-gray-50 flex items-center justify-center text-xl md:text-3xl mb-4 md:mb-6">{whyUs[1].icon}</div>
+                <h4 className="font-black text-sm md:text-xl text-gray-900 mb-1 md:mb-3">{whyUs[1].title}</h4>
+                <p className="text-gray-500 text-[11px] md:text-sm leading-relaxed hidden sm:block">{whyUs[1].description}</p>
               </div>
             </div>
 
-            {/* Row 3: Final Features */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {/* Row 3: Final 2 Features — side by side on all sizes */}
+            <div className="grid grid-cols-2 gap-4 md:gap-6">
               {/* Feature 3 */}
               <div
-                className="bg-white rounded-[3rem] p-10 border border-gray-100 hover:shadow-[0_20px_50px_rgba(0,0,0,0.06)] hover:-translate-y-2 transition-all duration-500 flex items-center gap-8"
+                className="bg-white rounded-2xl md:rounded-[3rem] p-5 md:p-10 border border-gray-100 hover:shadow-[0_20px_50px_rgba(0,0,0,0.06)] hover:-translate-y-1 transition-all duration-500 flex items-center gap-4 md:gap-8"
                 style={{
                   opacity: whyInView ? 1 : 0,
                   transform: whyInView ? "translateY(0)" : "translateY(40px)",
                   transition: "all 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.75s"
                 }}
               >
-                <div className="w-16 h-16 shrink-0 rounded-2xl bg-gray-50 flex items-center justify-center text-4xl">{whyUs[2].icon}</div>
+                <div className="w-10 h-10 md:w-16 md:h-16 shrink-0 rounded-xl md:rounded-2xl bg-gray-50 flex items-center justify-center text-xl md:text-4xl">{whyUs[2].icon}</div>
                 <div>
-                  <h4 className="font-black text-xl text-gray-900 mb-2">{whyUs[2].title}</h4>
-                  <p className="text-gray-500 text-sm leading-relaxed">{whyUs[2].description}</p>
+                  <h4 className="font-black text-sm md:text-xl text-gray-900 mb-1 md:mb-2">{whyUs[2].title}</h4>
+                  <p className="text-gray-500 text-[11px] md:text-sm leading-relaxed hidden sm:block">{whyUs[2].description}</p>
                 </div>
               </div>
 
               {/* Feature 4 */}
               <div
-                className="bg-white rounded-[3rem] p-10 border border-gray-100 hover:shadow-[0_20px_50px_rgba(0,0,0,0.06)] hover:-translate-y-2 transition-all duration-500 flex items-center gap-8"
+                className="bg-white rounded-2xl md:rounded-[3rem] p-5 md:p-10 border border-gray-100 hover:shadow-[0_20px_50px_rgba(0,0,0,0.06)] hover:-translate-y-1 transition-all duration-500 flex items-center gap-4 md:gap-8"
                 style={{
                   opacity: whyInView ? 1 : 0,
                   transform: whyInView ? "translateY(0)" : "translateY(40px)",
                   transition: "all 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.9s"
                 }}
               >
-                <div className="w-16 h-16 shrink-0 rounded-2xl bg-gray-50 flex items-center justify-center text-4xl">{whyUs[3].icon}</div>
+                <div className="w-10 h-10 md:w-16 md:h-16 shrink-0 rounded-xl md:rounded-2xl bg-gray-50 flex items-center justify-center text-xl md:text-4xl">{whyUs[3].icon}</div>
                 <div>
-                  <h4 className="font-black text-xl text-gray-900 mb-2">{whyUs[3].title}</h4>
-                  <p className="text-gray-500 text-sm leading-relaxed">{whyUs[3].description}</p>
+                  <h4 className="font-black text-sm md:text-xl text-gray-900 mb-1 md:mb-2">{whyUs[3].title}</h4>
+                  <p className="text-gray-500 text-[11px] md:text-sm leading-relaxed hidden sm:block">{whyUs[3].description}</p>
                 </div>
               </div>
             </div>
