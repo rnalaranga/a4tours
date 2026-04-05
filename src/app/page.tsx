@@ -359,17 +359,24 @@ function StatCard({ stat, index }: { stat: typeof stats[0]; index: number }) {
   return (
     <div
       ref={ref}
-      className="space-y-2 group"
+      className="relative p-6 sm:p-8 rounded-[2rem] bg-gray-50/50 border border-gray-100 overflow-hidden group hover:border-[#c9a84c]/30 hover:shadow-[0_15px_40px_rgba(0,0,0,0.04)] transition-all duration-500 w-full"
       style={{
         opacity: inView ? 1 : 0,
         transform: inView ? "translateY(0)" : "translateY(30px)",
-        transition: `all 0.8s cubic-bezier(0.16, 1, 0.3, 1) ${index * 0.1}s`,
+        transition: `all 0.8s cubic-bezier(0.16, 1, 0.3, 1) ${index * 0.15}s`,
       }}
     >
-      <div className="text-4xl md:text-5xl font-black text-[#550000] mb-2">{stat.value}</div>
-      <div className="flex items-center gap-3">
-        <div className="w-8 h-[1px] bg-[#c9a84c] transition-all duration-500 group-hover:w-12" />
-        <div className="text-gray-500 text-[10px] font-black uppercase tracking-[0.2em]">{stat.label}</div>
+      {/* Giant Faded Background Icon */}
+      <Icon className="absolute -bottom-6 -right-6 w-32 h-32 text-gray-900/[0.03] group-hover:scale-110 group-hover:text-[#c9a84c]/[0.05] transition-all duration-700" />
+      
+      <div className="relative z-10 flex flex-row sm:flex-col items-center sm:items-start gap-6 sm:gap-0">
+        <div className="w-14 h-14 sm:mb-6 rounded-2xl bg-white shadow-sm border border-gray-100 flex items-center justify-center shrink-0 text-[#550000] group-hover:scale-110 group-hover:bg-[#550000] group-hover:text-white transition-all duration-500">
+          <Icon size={24} />
+        </div>
+        <div>
+          <div className="text-3xl sm:text-4xl font-black text-gray-900 mb-1 leading-none">{stat.value}</div>
+          <div className="text-[10px] sm:text-xs font-bold text-gray-400 uppercase tracking-widest">{stat.label}</div>
+        </div>
       </div>
     </div>
   );
@@ -551,30 +558,30 @@ export default function HomePage() {
       </section>
 
       {/* ── STATS & TRUST ── */}
-      <section data-theme-color="#ffffff" className="py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="border-t border-gray-100 pt-16 flex flex-col lg:flex-row gap-12 items-center justify-between">
+      <section data-theme-color="#ffffff" className="py-12 md:py-24 bg-white">
+        <div className="max-w-7xl mx-auto px-4 md:px-6">
+          <div className="border-t-0 md:border-t border-gray-100 pt-8 md:pt-16 flex flex-col lg:flex-row gap-6 md:gap-12 items-center justify-between">
             
             {/* The Number Stats */}
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-8 md:gap-16 w-full lg:w-auto">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-8 w-full lg:w-auto">
               {stats.slice(0, 3).map((s, i) => (
                 <StatCard key={s.label} stat={s} index={i} />
               ))}
             </div>
 
             {/* The TripAdvisor Badge */}
-            <div className="w-full lg:w-auto flex justify-center lg:justify-end border-t lg:border-t-0 lg:border-l border-gray-100 pt-8 lg:pt-0 lg:pl-12">
+            <div className="w-full lg:w-auto flex justify-center lg:justify-end lg:border-l border-gray-100 pt-4 lg:pt-0 lg:pl-12">
                <a 
                  href="https://www.tripadvisor.com/Attraction_Review-g1500185-d3801228-Reviews-A4_Tours-Katunayake_Negombo_Western_Province.html" 
                  target="_blank" 
                  rel="noopener noreferrer"
-                 className="group flex items-center gap-6 p-6 rounded-[2rem] bg-gray-50 border border-gray-100 hover:bg-white hover:border-[#34e0a1]/30 hover:shadow-[0_20px_40px_rgba(52,224,161,0.1)] transition-all duration-500 w-full sm:w-auto"
+                 className="group flex flex-col sm:flex-row items-center gap-6 p-6 rounded-[2rem] bg-gray-50 border border-gray-100 hover:bg-white hover:border-[#34e0a1]/30 hover:shadow-[0_20px_40px_rgba(52,224,161,0.1)] transition-all duration-500 w-full sm:w-auto text-center sm:text-left"
                >
                   <div className="space-y-1">
-                     <div className="text-3xl font-black text-gray-900 flex items-center gap-1">4.9 <Star fill="#34e0a1" className="text-[#34e0a1]" size={20} /></div>
+                     <div className="text-3xl font-black text-gray-900 flex items-center justify-center sm:justify-start gap-1">4.9 <Star fill="#34e0a1" className="text-[#34e0a1]" size={20} /></div>
                      <div className="text-[10px] uppercase tracking-widest font-bold text-gray-400">Excellent Reviews</div>
                   </div>
-                  <div className="w-px h-12 bg-gray-200" />
+                  <div className="w-12 h-px sm:w-px sm:h-12 bg-gray-200" />
                   <div className="w-24 h-12 relative overflow-hidden group-hover:scale-105 transition-transform duration-500">
                      <img src="/images/tripadvisor-a4tours.png" alt="A4 Tours on TripAdvisor" className="w-full h-full object-contain" />
                   </div>
