@@ -961,7 +961,7 @@ export default function HomePage() {
                   <Compass size={48} className="text-white opacity-5" />
                 </div>
                 <img
-                  src={"/images/tripadvisor-a4tours.png"}
+                  src={"/images/a4tours-happy_traveller1.jpg"}
                   alt={`Traveler Memory ${index + 1}`}
                   className="absolute inset-0 w-full h-full object-cover transition-transform duration-[2s] group-hover:scale-110"
                 />
