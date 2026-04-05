@@ -1248,41 +1248,64 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── GALLERY ── */}
-      <section data-theme-color="#ffffff" className="py-32 bg-white" ref={galleryRef}>
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-16 space-y-4">
-            <span className="text-[10px] font-black tracking-[0.3em] uppercase text-[#c9a84c]">Visual Narratives</span>
-            <h2 className="text-4xl md:text-5xl font-black text-gray-900">Island Snapshots</h2>
-            <div className="w-12 h-0.5 bg-[#c9a84c] mx-auto opacity-50" />
+      {/* ── GALLERY (ISLAND SNAPSHOTS) ── */}
+      <section data-theme-color="#ffffff" className="py-32 bg-white relative overflow-hidden" ref={galleryRef}>
+        <div className="max-w-7xl mx-auto px-6 mb-16">
+          <div className="text-center space-y-4">
+            <span className="text-[10px] font-black tracking-[0.4em] uppercase text-[#c9a84c]">Visual Narratives</span>
+            <h2 className="text-5xl md:text-6xl font-black text-gray-900 leading-none">Island Snapshots</h2>
+            <p className="text-gray-400 text-sm md:text-base font-medium max-w-lg mx-auto">A curated gallery of Sri Lanka's soul — where every frame tells a story of heritage and natural wonder.</p>
           </div>
+        </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {galleryItems.map((item, i) => (
-              <div
-                key={item.id}
-                className={`group relative rounded-[2rem] overflow-hidden aspect-[4/5] bg-gray-50 ${i === 0 || i === 5 ? 'lg:col-span-2 aspect-[16/9]' : ''}`}
-                style={{
-                  opacity: galleryInView ? 1 : 0,
-                  transform: galleryInView ? "translateY(0)" : "translateY(40px)",
-                  transition: `all 1s cubic-bezier(0.16, 1, 0.3, 1) ${0.1 * i}s`
-                }}
-              >
-                <div className="absolute inset-0 bg-gray-200 transition-transform duration-1000 group-hover:scale-110 flex items-center justify-center overflow-hidden">
-                  {item.image ? (
-                    <img src={item.image} alt={item.title} className="w-full h-full object-cover" />
-                  ) : (
-                    <Compass size={48} className="opacity-10" />
-                  )}
-                </div>
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-8">
-                  <div className="text-white">
-                    <div className="text-[10px] font-black uppercase tracking-widest text-[#c9a84c] mb-1">{item.category}</div>
-                    <h4 className="text-xl font-black">{item.title}</h4>
+        {/* Full-bleed Mosaic Gallery */}
+        <div className="w-full px-1 md:px-2">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-1 md:gap-2 auto-rows-[250px] md:auto-rows-[350px]">
+            {galleryItems.map((item, i) => {
+              // Perfectly balanced 4x2 grid (8 cells total)
+              const spanClass = 
+                i === 0 ? "col-span-2 row-span-1 md:col-span-2 md:row-span-1" : // Top Wide (Tea Country)
+                i === 5 ? "col-span-2 row-span-1 md:col-span-2 md:row-span-1" : // Bottom Wide (Nine Arch)
+                "col-span-1 row-span-1"; // Standard Squares (including Golden Coast)
+
+              return (
+                <div
+                  key={item.id}
+                  className={`group relative overflow-hidden bg-gray-100 ${spanClass}`}
+                  style={{
+                    opacity: galleryInView ? 1 : 0,
+                    transform: galleryInView ? "translateY(0)" : "translateY(30px)",
+                    transition: `all 0.8s cubic-bezier(0.16, 1, 0.3, 1) ${0.1 * i}s`
+                  }}
+                >
+                  {/* Image with subtle zoom on hover */}
+                  <div className="absolute inset-0 transition-transform duration-1000 group-hover:scale-105">
+                    {item.image ? (
+                      <img src={item.image} alt={item.title} className="w-full h-full object-cover" />
+                    ) : (
+                      <div className="w-full h-full flex items-center justify-center bg-gray-50 text-gray-200">
+                        <Compass size={40} className="opacity-10" />
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Sophisticated Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 flex flex-col justify-end p-6 md:p-10 pointer-events-none">
+                    <div className="translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                      <span className="text-[10px] font-black tracking-widest text-[#c9a84c] uppercase mb-2 block">{item.category}</span>
+                      <h4 className="text-2xl md:text-3xl font-black text-white leading-tight">{item.title}</h4>
+                    </div>
+                  </div>
+
+                  {/* Minimal glass badge (always visible) */}
+                  <div className="absolute top-4 right-4 md:top-6 md:right-6 opacity-60 group-hover:opacity-100 transition-opacity">
+                    <div className="w-8 h-8 rounded-full border border-white/20 backdrop-blur-md flex items-center justify-center text-white/40 group-hover:text-[#c9a84c]">
+                      <ArrowRight size={14} className="-rotate-45" />
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>
