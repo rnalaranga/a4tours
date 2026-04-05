@@ -38,11 +38,10 @@ export default function Navbar() {
         <Link href="/" className="flex items-center gap-2 group shrink-0">
           <div className="relative w-32 h-10 md:w-40 md:h-12 transition-all duration-300 group-hover:scale-105">
             <Image
-              src="/logo.png"
+              src={scrolled || !isHome ? "/images/logo-a4tourscolor.png" : "/images/logo-main.png"}
               alt="A4 Tours Logo"
               fill
-              className={`object-contain transition-all duration-300 ${scrolled || !isHome ? "invert brightness-0" : ""
-                }`}
+              className={`object-contain transition-all duration-300`}
               priority
             />
           </div>
