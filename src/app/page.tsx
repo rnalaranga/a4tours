@@ -395,17 +395,33 @@ function StatCard({ stat, index }: { stat: typeof stats[0]; index: number }) {
 }
 
 /* ── Page ─────────────────────────────────────────── */
+const heroImages = [
+  { src: "/images/hero-sigiriya.jpg", label: "Sigiriya Rock Fortress" },
+  { src: "/images/hero-golden-beach.jpg", label: "Sri Lanka Beach" },
+  { src: "/images/hero-beach.jpg", label: "Downsouth Sri Lanka" },
+  { src: "/images/hero-culture.jpg", label: "Sri Lanka Culture and Heritage" },
+  { src: "/images/hero-wildlife.jpg", label: "Wildlife Safari Sri Lanka" },
+];
+
 export default function HomePage() {
   const [activeTestimonial, setActiveTestimonial] = useState(0);
   const [heroLoaded, setHeroLoaded] = useState(false);
+  const [heroSlide, setHeroSlide] = useState(0);
 
   useEffect(() => {
     setTimeout(() => setHeroLoaded(true), 100);
-    const interval = setInterval(
+    const testimonialTimer = setInterval(
       () => setActiveTestimonial((p) => (p + 1) % testimonials.length),
       5000
     );
-    return () => clearInterval(interval);
+    const slideTimer = setInterval(
+      () => setHeroSlide((p) => (p + 1) % heroImages.length),
+      6000
+    );
+    return () => {
+      clearInterval(testimonialTimer);
+      clearInterval(slideTimer);
+    };
   }, []);
 
   const { ref: whyRef, inView: whyInView } = useInView(0.1);
@@ -446,25 +462,64 @@ export default function HomePage() {
     <>
       {/* ── HERO ── */}
       <section data-theme-color="#016bb5" className="relative min-h-screen flex items-center justify-center overflow-hidden">
-        {/* Full-width Background Image with Parallax-ready feel */}
-        <div
-          style={{
-            position: "absolute",
-            inset: 0,
-            backgroundImage: "url('/images/hero-sigiriya.jpg')",
-            backgroundSize: "cover",
-            backgroundPosition: "center 30%",
-          }}
-          className="scale-105"
-        />
+        {/* ── Cinematic Ken Burns Slideshow ── */}
+        <style dangerouslySetInnerHTML={{
+          __html: `
+          @keyframes kenburns-0 {
+            0%   { transform: scale(1.08) translate(0%, 0%); }
+            100% { transform: scale(1.18) translate(-2%, -1.5%); }
+          }
+          @keyframes kenburns-1 {
+            0%   { transform: scale(1.1) translate(2%, 1%); }
+            100% { transform: scale(1.2) translate(-1.5%, 0%); }
+          }
+          @keyframes kenburns-2 {
+            0%   { transform: scale(1.08) translate(-1.5%, 0.5%); }
+            100% { transform: scale(1.18) translate(1.5%, -1%); }
+          }
+          @keyframes kenburns-3 {
+            0%   { transform: scale(1.12) translate(1%, -1%); }
+            100% { transform: scale(1.2) translate(-2%, 1%); }
+          }
+          @keyframes kenburns-4 {
+            0%   { transform: scale(1.08) translate(-1%, 1%); }
+            100% { transform: scale(1.18) translate(2%, -0.5%); }
+          }
+          @keyframes fadeInUp {
+            0%   { opacity: 0; transform: translateY(6px); }
+            100% { opacity: 1; transform: translateY(0); }
+          }
+        `}} />
 
-        {/* Sophisticated Boutique Gradient Overlay */}
+        {/* Slide stack */}
+        {heroImages.map((slide, i) => (
+          <div
+            key={slide.src}
+            className="absolute inset-0"
+            style={{
+              opacity: i === heroSlide ? 1 : 0,
+              transition: "opacity 1.2s ease",
+              zIndex: i === heroSlide ? 0 : -1,
+            }}
+          >
+            <img
+              src={slide.src}
+              alt={slide.label}
+              className="absolute inset-0 w-full h-full object-cover"
+              style={{
+                animation: i === heroSlide ? `kenburns-${i} 7s ease-out forwards` : "none",
+              }}
+            />
+          </div>
+        ))}
+
+        {/* Gradient Overlay */}
         <div
           style={{
             position: "absolute",
             inset: 0,
             background:
-              "radial-gradient(circle at 70% 30%, rgba(0,0,0,0) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0.85) 100%)",
+              "radial-gradient(circle at 70% 30%, rgba(0,0,0,0) 0%, rgba(0,0,0,0.45) 50%, rgba(0,0,0,0.88) 100%)",
             zIndex: 1,
           }}
         />
@@ -556,13 +611,48 @@ export default function HomePage() {
           </div>
         </div>
 
-        {/* Minimalist Scroll Hint */}
+        {/* Slide Indicators — bottom right */}
+        <div
+          className="absolute bottom-10 right-10 z-20 flex items-center gap-2"
+          style={{ opacity: heroLoaded ? 1 : 0, transition: "all 1s ease 1s" }}
+        >
+          {heroImages.map((slide, i) => (
+            <button
+              key={i}
+              onClick={() => setHeroSlide(i)}
+              title={slide.label}
+              className="transition-all duration-500"
+              style={{
+                width: i === heroSlide ? 28 : 8,
+                height: 8,
+                borderRadius: 4,
+                background: i === heroSlide ? "#c9a84c" : "rgba(255,255,255,0.35)",
+              }}
+            />
+          ))}
+        </div>
+
+        {/* Current slide label */}
+        <div
+          className="absolute bottom-10 left-12 z-20 hidden md:block"
+          style={{ opacity: heroLoaded ? 1 : 0, transition: "all 1s ease 1s" }}
+        >
+          <span
+            key={heroSlide}
+            className="text-[10px] font-black tracking-[0.35em] uppercase"
+            style={{
+              color: "rgba(255,255,255,0.45)",
+              animation: "fadeInUp 0.6s ease forwards",
+            }}
+          >
+            {heroImages[heroSlide].label}
+          </span>
+        </div>
+
+        {/* Scroll hint */}
         <div
           className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 text-white/30"
-          style={{
-            opacity: heroLoaded ? 1 : 0,
-            transition: "all 1s ease 1s"
-          }}
+          style={{ opacity: heroLoaded ? 1 : 0, transition: "all 1s ease 1s" }}
         >
           <span className="text-[10px] font-black tracking-[0.4em] uppercase">Begin Your Journey</span>
           <div className="w-px h-12 bg-gradient-to-b from-white/40 to-transparent" />
