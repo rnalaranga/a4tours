@@ -858,118 +858,97 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── WHY CHOOSE US (BENTO GRID) ── */}
-      <section data-theme-color="#ffffff" className="py-16 md:py-32 bg-white" ref={whyRef}>
-        <div className="max-w-7xl mx-auto px-4 md:px-6">
-          <div className="flex flex-col gap-4 md:gap-6">
+      {/* ── WHY CHOOSE US ── */}
+      <section data-theme-color="#0d1a0f" className="relative min-h-screen flex items-center overflow-hidden" ref={whyRef}>
 
-            {/* Row 1: Intro & Stat */}
-            <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
-              {/* Main Title Block */}
-              <div
-                className="col-span-2 lg:col-span-2 bg-[#fafafa] rounded-2xl md:rounded-[3rem] p-6 md:p-16 flex flex-col justify-center border border-gray-100"
-                style={{
-                  opacity: whyInView ? 1 : 0,
-                  transform: whyInView ? "translateY(0)" : "translateY(40px)",
-                  transition: "all 0.8s cubic-bezier(0.16, 1, 0.3, 1)"
-                }}
-              >
-                <span className="text-[9px] md:text-[10px] font-black tracking-[0.4em] uppercase text-[#c9a84c] mb-3 md:mb-6">Authentic Excellence</span>
-                <h2 className="text-2xl md:text-6xl font-black text-gray-900 leading-[1.1] mb-3 md:mb-6">Beyond a Simple <br className="hidden md:block" />Travel Agency</h2>
-                <p className="text-gray-500 text-xs md:text-xl leading-relaxed max-w-2xl hidden sm:block">We don&apos;t just book hotels; we architect memories. Every detail is hand-picked to ensure your journey reflects the pure elegance of Sri Lanka.</p>
+        {/* Full bleed background */}
+        <div className="absolute inset-0">
+          <img src="/images/gallery-1.png" alt="" className="w-full h-full object-cover" />
+          {/* Dark gradient: strong on left, fades to semi-dark on right */}
+          <div className="absolute inset-0" style={{ background: "linear-gradient(105deg, rgba(8,18,10,0.97) 0%, rgba(8,18,10,0.88) 40%, rgba(8,18,10,0.60) 70%, rgba(8,18,10,0.40) 100%)" }} />
+        </div>
+
+        <div className="relative z-10 w-full max-w-7xl mx-auto px-4 md:px-6 py-16 md:py-24">
+          <div className="grid lg:grid-cols-2 gap-10 lg:gap-20 items-center">
+
+            {/* LEFT — Title + Stats */}
+            <div
+              className="space-y-8 md:space-y-10"
+              style={{
+                opacity: whyInView ? 1 : 0,
+                transform: whyInView ? "translateX(0)" : "translateX(-40px)",
+                transition: "all 1s cubic-bezier(0.16, 1, 0.3, 1)"
+              }}
+            >
+              <div className="space-y-4">
+                <span className="text-[10px] font-black tracking-[0.4em] uppercase text-[#c9a84c]">Authentic Excellence</span>
+                <h2 className="text-4xl sm:text-5xl md:text-6xl font-black text-white leading-[1.05]">
+                  Beyond a Simple<br />
+                  <span style={{ background: "linear-gradient(135deg, #c9a84c, #f0d080)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
+                    Travel Agency
+                  </span>
+                </h2>
+                <p className="text-white/60 text-base md:text-lg leading-relaxed max-w-md">
+                  We don&apos;t just book hotels — we architect memories. Every detail is hand-picked to reflect the pure elegance of Sri Lanka.
+                </p>
               </div>
 
-              {/* Stat Block */}
-              <div
-                className="col-span-2 sm:col-span-1 lg:col-span-1 bg-gradient-to-br from-[#550000] to-[#2a0000] rounded-2xl md:rounded-[3rem] p-6 md:p-12 text-center flex flex-col items-center justify-center text-white relative overflow-hidden group hover:shadow-[0_20px_50px_rgba(85,0,0,0.3)] transition-all duration-700"
-                style={{
-                  opacity: whyInView ? 1 : 0,
-                  transform: whyInView ? "translateY(0)" : "translateY(40px)",
-                  transition: "all 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.15s"
-                }}
-              >
-                <div className="absolute inset-0 bg-[#000000] opacity-0 group-hover:opacity-20 transition-opacity duration-1000" />
-                <div className="relative z-10 text-5xl md:text-8xl font-black mb-2 md:mb-4 group-hover:text-[#c9a84c] transition-colors duration-500">15+</div>
-                <div className="relative z-10 text-[9px] md:text-xs font-black uppercase tracking-[0.3em] text-[#c9a84c]">Years of Craftsmanship</div>
-              </div>
-            </div>
-
-            {/* Row 2: Features Grid — 2×2 on mobile, 4-col on desktop */}
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
-              {/* Feature 1 */}
-              <div
-                className="bg-white rounded-2xl md:rounded-[3rem] p-5 md:p-10 border border-gray-100 hover:shadow-[0_20px_50px_rgba(0,0,0,0.06)] hover:-translate-y-1 transition-all duration-500 flex flex-col justify-center"
-                style={{
-                  opacity: whyInView ? 1 : 0,
-                  transform: whyInView ? "translateY(0)" : "translateY(40px)",
-                  transition: "all 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.3s"
-                }}
-              >
-                <div className="w-10 h-10 md:w-14 md:h-14 shrink-0 rounded-xl md:rounded-2xl bg-gray-50 flex items-center justify-center text-xl md:text-3xl mb-4 md:mb-6">{whyUs[0].icon}</div>
-                <h4 className="font-black text-sm md:text-xl text-gray-900 mb-1 md:mb-3">{whyUs[0].title}</h4>
-                <p className="text-gray-500 text-[11px] md:text-sm leading-relaxed hidden sm:block">{whyUs[0].description}</p>
+              {/* Stats row */}
+              <div className="flex gap-6 md:gap-10 pt-2">
+                {[
+                  { value: "15+", label: "Years of Craftsmanship" },
+                  { value: "5K+", label: "Happy Travellers" },
+                  { value: "4.9★", label: "TripAdvisor Rating" },
+                ].map((s, i) => (
+                  <div key={s.label} className="flex flex-col"
+                    style={{
+                      opacity: whyInView ? 1 : 0,
+                      transform: whyInView ? "translateY(0)" : "translateY(20px)",
+                      transition: `all 0.8s cubic-bezier(0.16, 1, 0.3, 1) ${0.3 + i * 0.1}s`
+                    }}
+                  >
+                    <span className="text-2xl md:text-4xl font-black text-white leading-none">{s.value}</span>
+                    <span className="text-[9px] md:text-[10px] font-bold uppercase tracking-widest text-white/40 mt-1 leading-tight">{s.label}</span>
+                  </div>
+                ))}
               </div>
 
-              {/* Centerpiece Logo — spans 2 cols on all sizes */}
-              <div
-                className="col-span-2 rounded-2xl md:rounded-[3rem] overflow-hidden bg-gray-50 relative group border border-gray-100 min-h-[160px] md:min-h-[300px]"
-                style={{
-                  opacity: whyInView ? 1 : 0,
-                  transform: whyInView ? "translateY(0)" : "translateY(40px)",
-                  transition: "all 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.45s"
-                }}
-              >
-                <img src="/images/logo-a4tours.png" className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" alt="A4 Tours Logo" />
-              </div>
-
-              {/* Feature 2 */}
-              <div
-                className="bg-white rounded-2xl md:rounded-[3rem] p-5 md:p-10 border border-gray-100 hover:shadow-[0_20px_50px_rgba(0,0,0,0.06)] hover:-translate-y-1 transition-all duration-500 flex flex-col justify-center"
-                style={{
-                  opacity: whyInView ? 1 : 0,
-                  transform: whyInView ? "translateY(0)" : "translateY(40px)",
-                  transition: "all 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.6s"
-                }}
-              >
-                <div className="w-10 h-10 md:w-14 md:h-14 shrink-0 rounded-xl md:rounded-2xl bg-gray-50 flex items-center justify-center text-xl md:text-3xl mb-4 md:mb-6">{whyUs[1].icon}</div>
-                <h4 className="font-black text-sm md:text-xl text-gray-900 mb-1 md:mb-3">{whyUs[1].title}</h4>
-                <p className="text-gray-500 text-[11px] md:text-sm leading-relaxed hidden sm:block">{whyUs[1].description}</p>
+              {/* Logo */}
+              <div className="w-28 md:w-36 h-14 md:h-16 relative opacity-80">
+                <img src="/images/logo-main.png" alt="A4 Tours" className="w-full h-full object-contain brightness-0 invert" />
               </div>
             </div>
 
-            {/* Row 3: Final 2 Features — side by side on all sizes */}
-            <div className="grid grid-cols-2 gap-4 md:gap-6">
-              {/* Feature 3 */}
-              <div
-                className="bg-white rounded-2xl md:rounded-[3rem] p-5 md:p-10 border border-gray-100 hover:shadow-[0_20px_50px_rgba(0,0,0,0.06)] hover:-translate-y-1 transition-all duration-500 flex items-center gap-4 md:gap-8"
-                style={{
-                  opacity: whyInView ? 1 : 0,
-                  transform: whyInView ? "translateY(0)" : "translateY(40px)",
-                  transition: "all 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.75s"
-                }}
-              >
-                <div className="w-10 h-10 md:w-16 md:h-16 shrink-0 rounded-xl md:rounded-2xl bg-gray-50 flex items-center justify-center text-xl md:text-4xl">{whyUs[2].icon}</div>
-                <div>
-                  <h4 className="font-black text-sm md:text-xl text-gray-900 mb-1 md:mb-2">{whyUs[2].title}</h4>
-                  <p className="text-gray-500 text-[11px] md:text-sm leading-relaxed hidden sm:block">{whyUs[2].description}</p>
+            {/* RIGHT — 2×2 Glassmorphism Feature Cards */}
+            <div className="grid grid-cols-2 gap-3 md:gap-5">
+              {whyUs.map((feat, i) => (
+                <div
+                  key={feat.title}
+                  className="group p-5 md:p-8 rounded-2xl md:rounded-3xl flex flex-col gap-3 md:gap-5 cursor-default transition-all duration-500 hover:-translate-y-1"
+                  style={{
+                    background: "rgba(255,255,255,0.06)",
+                    backdropFilter: "blur(20px)",
+                    border: "1px solid rgba(255,255,255,0.10)",
+                    boxShadow: "0 8px 32px rgba(0,0,0,0.3)",
+                    opacity: whyInView ? 1 : 0,
+                    transform: whyInView ? "translateY(0)" : "translateY(40px)",
+                    transition: `all 0.9s cubic-bezier(0.16, 1, 0.3, 1) ${0.2 + i * 0.15}s`
+                  }}
+                >
+                  <div
+                    className="w-10 h-10 md:w-12 md:h-12 rounded-xl flex items-center justify-center text-xl md:text-2xl group-hover:scale-110 transition-transform duration-500"
+                    style={{ background: "rgba(201,168,76,0.15)", border: "1px solid rgba(201,168,76,0.25)" }}
+                  >
+                    {feat.icon}
+                  </div>
+                  <div>
+                    <h4 className="font-black text-white text-sm md:text-lg leading-tight mb-1">{feat.title}</h4>
+                    <p className="text-white/50 text-[11px] md:text-sm leading-relaxed hidden sm:block">{feat.description}</p>
+                  </div>
+                  {/* Hover glow accent */}
+                  <div className="absolute inset-0 rounded-2xl md:rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" style={{ boxShadow: "inset 0 0 0 1px rgba(201,168,76,0.3)" }} />
                 </div>
-              </div>
-
-              {/* Feature 4 */}
-              <div
-                className="bg-white rounded-2xl md:rounded-[3rem] p-5 md:p-10 border border-gray-100 hover:shadow-[0_20px_50px_rgba(0,0,0,0.06)] hover:-translate-y-1 transition-all duration-500 flex items-center gap-4 md:gap-8"
-                style={{
-                  opacity: whyInView ? 1 : 0,
-                  transform: whyInView ? "translateY(0)" : "translateY(40px)",
-                  transition: "all 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.9s"
-                }}
-              >
-                <div className="w-10 h-10 md:w-16 md:h-16 shrink-0 rounded-xl md:rounded-2xl bg-gray-50 flex items-center justify-center text-xl md:text-4xl">{whyUs[3].icon}</div>
-                <div>
-                  <h4 className="font-black text-sm md:text-xl text-gray-900 mb-1 md:mb-2">{whyUs[3].title}</h4>
-                  <p className="text-gray-500 text-[11px] md:text-sm leading-relaxed hidden sm:block">{whyUs[3].description}</p>
-                </div>
-              </div>
+              ))}
             </div>
 
           </div>
