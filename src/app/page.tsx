@@ -412,11 +412,11 @@ export default function HomePage() {
     setTimeout(() => setHeroLoaded(true), 100);
     const testimonialTimer = setInterval(
       () => setActiveTestimonial((p) => (p + 1) % testimonials.length),
-      5000
+      2000
     );
     const slideTimer = setInterval(
       () => setHeroSlide((p) => (p + 1) % heroImages.length),
-      6000
+      3000
     );
     return () => {
       clearInterval(testimonialTimer);
