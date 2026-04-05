@@ -45,6 +45,7 @@ const featuredPackages = [
     category: "Cultural",
     badge: "Best Seller",
     highlights: ["UNESCO Sites", "Rock Fortress", "Ancient Temples"],
+    image: "/images/dest-sigiriya.jpg",
   },
   {
     id: 2,
@@ -57,6 +58,7 @@ const featuredPackages = [
     category: "Beach",
     badge: "Popular",
     highlights: ["Whale Watching", "Surf Lessons", "Galle Fort"],
+    image: "/images/dest-mirissa.jpg",
   },
   {
     id: 3,
@@ -69,6 +71,7 @@ const featuredPackages = [
     category: "Nature",
     badge: "Premium",
     highlights: ["Train Journey", "Tea Plantations", "Nine Arch Bridge"],
+    image: "/images/gallery-1.png",
   },
   {
     id: 4,
@@ -81,6 +84,7 @@ const featuredPackages = [
     category: "Wildlife",
     badge: "Adventure",
     highlights: ["Leopard Spotting", "Elephant Gathering", "Bird Watching"],
+    image: "/images/dest-yala.jpg",
   },
 ];
 
@@ -271,11 +275,13 @@ function PackageCard({ pkg, index }: { pkg: typeof featuredPackages[0]; index: n
     >
       {/* Image Container */}
       <div className="relative aspect-[4/3] overflow-hidden">
-        <div
-          className="absolute inset-0 bg-gray-100 transition-transform duration-1000 group-hover:scale-110 flex items-center justify-center text-gray-300"
-        >
-          <Compass size={48} className="opacity-10" />
-        </div>
+        <img
+          src={pkg.image}
+          alt={pkg.title}
+          className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
+        />
+        {/* Soft overlay to ensure badge readability */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-black/10 mix-blend-overlay pointer-events-none" />
 
         {/* Floating Badges */}
         <div className="absolute top-5 left-5 flex gap-2 z-10">
@@ -368,7 +374,7 @@ function StatCard({ stat, index }: { stat: typeof stats[0]; index: number }) {
     >
       {/* Giant Faded Background Icon */}
       <Icon className="absolute -bottom-6 -right-6 w-32 h-32 text-gray-900/[0.03] group-hover:scale-110 group-hover:text-[#c9a84c]/[0.05] transition-all duration-700" />
-      
+
       <div className="relative z-10 flex flex-row sm:flex-col items-center sm:items-start gap-6 sm:gap-0">
         <div className="w-14 h-14 sm:mb-6 rounded-2xl bg-white shadow-sm border border-gray-100 flex items-center justify-center shrink-0 text-[#550000] group-hover:scale-110 group-hover:bg-[#550000] group-hover:text-white transition-all duration-500">
           <Icon size={24} />
@@ -410,23 +416,23 @@ export default function HomePage() {
 
       let activeColor = "#016bb5"; // Default to sky blue for Hero
       sections.forEach(sec => {
-         const top = sec.offsetTop;
-         const bottom = top + sec.offsetHeight;
-         if (scrollCenter >= top && scrollCenter <= bottom) {
-            activeColor = sec.getAttribute('data-theme-color') || activeColor;
-         }
+        const top = sec.offsetTop;
+        const bottom = top + sec.offsetHeight;
+        if (scrollCenter >= top && scrollCenter <= bottom) {
+          activeColor = sec.getAttribute('data-theme-color') || activeColor;
+        }
       });
 
       const metaThemeColor = document.querySelector('meta[name="theme-color"]');
       if (metaThemeColor && metaThemeColor.getAttribute('content') !== activeColor) {
-         metaThemeColor.setAttribute('content', activeColor);
+        metaThemeColor.setAttribute('content', activeColor);
       }
     };
-    
+
     window.addEventListener('scroll', handleScroll, { passive: true });
     // Trigger on mount
     handleScroll();
-    
+
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -561,7 +567,7 @@ export default function HomePage() {
       <section data-theme-color="#ffffff" className="py-12 md:py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 md:px-6">
           <div className="border-t-0 md:border-t border-gray-100 pt-8 md:pt-16 flex flex-col lg:flex-row gap-6 md:gap-12 items-center justify-between">
-            
+
             {/* The Number Stats */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-8 w-full lg:w-auto">
               {stats.slice(0, 3).map((s, i) => (
@@ -571,21 +577,21 @@ export default function HomePage() {
 
             {/* The TripAdvisor Badge */}
             <div className="w-full lg:w-auto flex justify-center lg:justify-end lg:border-l border-gray-100 pt-4 lg:pt-0 lg:pl-12">
-               <a 
-                 href="https://www.tripadvisor.com/Attraction_Review-g1500185-d3801228-Reviews-A4_Tours-Katunayake_Negombo_Western_Province.html" 
-                 target="_blank" 
-                 rel="noopener noreferrer"
-                 className="group flex flex-col sm:flex-row items-center gap-6 p-6 rounded-[2rem] bg-gray-50 border border-gray-100 hover:bg-white hover:border-[#34e0a1]/30 hover:shadow-[0_20px_40px_rgba(52,224,161,0.1)] transition-all duration-500 w-full sm:w-auto text-center sm:text-left"
-               >
-                  <div className="space-y-1">
-                     <div className="text-3xl font-black text-gray-900 flex items-center justify-center sm:justify-start gap-1">4.9 <Star fill="#34e0a1" className="text-[#34e0a1]" size={20} /></div>
-                     <div className="text-[10px] uppercase tracking-widest font-bold text-gray-400">Excellent Reviews</div>
-                  </div>
-                  <div className="w-12 h-px sm:w-px sm:h-12 bg-gray-200" />
-                  <div className="w-24 h-12 relative overflow-hidden group-hover:scale-105 transition-transform duration-500">
-                     <img src="/images/tripadvisor-a4tours.png" alt="A4 Tours on TripAdvisor" className="w-full h-full object-contain" />
-                  </div>
-               </a>
+              <a
+                href="https://www.tripadvisor.com/Attraction_Review-g1500185-d3801228-Reviews-A4_Tours-Katunayake_Negombo_Western_Province.html"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex flex-col sm:flex-row items-center gap-6 p-6 rounded-[2rem] bg-gray-50 border border-gray-100 hover:bg-white hover:border-[#34e0a1]/30 hover:shadow-[0_20px_40px_rgba(52,224,161,0.1)] transition-all duration-500 w-full sm:w-auto text-center sm:text-left"
+              >
+                <div className="space-y-1">
+                  <div className="text-3xl font-black text-gray-900 flex items-center justify-center sm:justify-start gap-1">4.9 <Star fill="#34e0a1" className="text-[#34e0a1]" size={20} /></div>
+                  <div className="text-[10px] uppercase tracking-widest font-bold text-gray-400">Excellent Reviews</div>
+                </div>
+                <div className="w-12 h-px sm:w-px sm:h-12 bg-gray-200" />
+                <div className="w-24 h-12 relative overflow-hidden group-hover:scale-105 transition-transform duration-500">
+                  <img src="/images/tripadvisor-a4tours.png" alt="A4 Tours on TripAdvisor" className="w-full h-full object-contain" />
+                </div>
+              </a>
             </div>
 
           </div>
@@ -823,53 +829,53 @@ export default function HomePage() {
 
         <div className="max-w-7xl mx-auto px-6 relative z-10">
           <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
-            
+
             {/* Left Image Column */}
             <div className="relative group">
-               <div className="aspect-[4/5] rounded-t-[5rem] rounded-b-3xl overflow-hidden shadow-2xl relative z-10 border border-white">
-                  <img 
-                    src="/images/ayurveda-main.jpg" 
-                    alt="Sri Lanka Ayurveda" 
-                    className="w-full h-full object-cover transition-transform duration-[2s] group-hover:scale-105"
-                  />
-                  {/* Subtle calm overlay */}
-                  <div className="absolute inset-0 bg-[#354f3b]/10 mix-blend-overlay transition-opacity duration-700 opacity-50 group-hover:opacity-0" />
-               </div>
-               {/* Floating accent card */}
-               <div className="absolute -bottom-8 -right-8 bg-white p-6 rounded-[2rem] shadow-[0_20px_50px_rgba(0,0,0,0.05)] border border-gray-50 z-20 hidden md:block">
-                  <div className="flex items-center gap-4">
-                     <div className="w-12 h-12 bg-[#e8efe9] rounded-full flex items-center justify-center text-[#354f3b]">
-                        <Star size={20} className="fill-[#354f3b] opacity-50" />
-                     </div>
-                     <div>
-                        <div className="text-xl font-black text-gray-900">100%</div>
-                        <div className="text-[10px] font-black uppercase tracking-widest text-gray-400">Natural Healing</div>
-                     </div>
+              <div className="aspect-[4/5] rounded-t-[5rem] rounded-b-3xl overflow-hidden shadow-2xl relative z-10 border border-white">
+                <img
+                  src="/images/ayurveda-main.jpg"
+                  alt="Sri Lanka Ayurveda"
+                  className="w-full h-full object-cover transition-transform duration-[2s] group-hover:scale-105"
+                />
+                {/* Subtle calm overlay */}
+                <div className="absolute inset-0 bg-[#354f3b]/10 mix-blend-overlay transition-opacity duration-700 opacity-50 group-hover:opacity-0" />
+              </div>
+              {/* Floating accent card */}
+              <div className="absolute -bottom-8 -right-8 bg-white p-6 rounded-[2rem] shadow-[0_20px_50px_rgba(0,0,0,0.05)] border border-gray-50 z-20 hidden md:block">
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 bg-[#e8efe9] rounded-full flex items-center justify-center text-[#354f3b]">
+                    <Star size={20} className="fill-[#354f3b] opacity-50" />
                   </div>
-               </div>
+                  <div>
+                    <div className="text-xl font-black text-gray-900">100%</div>
+                    <div className="text-[10px] font-black uppercase tracking-widest text-gray-400">Natural Healing</div>
+                  </div>
+                </div>
+              </div>
             </div>
 
             {/* Right Text Column */}
             <div className="space-y-8 md:pl-8">
-               <div className="space-y-4">
-                  <span className="text-[10px] font-black tracking-[0.4em] uppercase text-[#738f79]">Wholistic Wellness</span>
-                  <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-[#2e2b26] leading-[1.1]">
-                     Restore Body, <br/>Mind & Soul
-                  </h2>
-               </div>
-               
-               <p className="text-[#5c574f] text-lg leading-relaxed pt-4">
-                  Experience the profound serenity of Sri Lankan Ayurveda. Rooted in 5,000 years of ancient wisdom, our authentic wellness retreats utilize native herbs, natural oils, and expert techniques to completely rejuvenate your spirit.
-               </p>
-               <p className="text-[#8c857b] text-base leading-relaxed">
-                  Whether you seek deep relaxation through a warm Shirodhara oil treatment, a cleansing Panchakarma retreat, or simply a peaceful escape in a jungle spa, we design wellness journeys that bring you back into perfectly natural harmony.
-               </p>
+              <div className="space-y-4">
+                <span className="text-[10px] font-black tracking-[0.4em] uppercase text-[#738f79]">Wholistic Wellness</span>
+                <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-[#2e2b26] leading-[1.1]">
+                  Restore Body, <br />Mind & Soul
+                </h2>
+              </div>
 
-               <div className="pt-6">
-                  <Link href="/packages" className="inline-flex items-center justify-center bg-[#465c4a] text-white px-8 py-4 rounded-full text-sm font-black uppercase tracking-widest hover:bg-[#354f3b] transition-colors shadow-lg shadow-[#465c4a]/20">
-                     Discover Wellness Escapes
-                  </Link>
-               </div>
+              <p className="text-[#5c574f] text-lg leading-relaxed pt-4">
+                Experience the profound serenity of Sri Lankan Ayurveda. Rooted in 5,000 years of ancient wisdom, our authentic wellness retreats utilize native herbs, natural oils, and expert techniques to completely rejuvenate your spirit.
+              </p>
+              <p className="text-[#8c857b] text-base leading-relaxed">
+                Whether you seek deep relaxation through a warm Shirodhara oil treatment, a cleansing Panchakarma retreat, or simply a peaceful escape in a jungle spa, we design wellness journeys that bring you back into perfectly natural harmony.
+              </p>
+
+              <div className="pt-6">
+                <Link href="/packages" className="inline-flex items-center justify-center bg-[#465c4a] text-white px-8 py-4 rounded-full text-sm font-black uppercase tracking-widest hover:bg-[#354f3b] transition-colors shadow-lg shadow-[#465c4a]/20">
+                  Discover Wellness Escapes
+                </Link>
+              </div>
             </div>
           </div>
         </div>
