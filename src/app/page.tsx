@@ -552,68 +552,151 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── WHY CHOOSE US ── */}
-      <section className="py-32 bg-white overflow-hidden" ref={whyRef}>
+      {/* ── WHY CHOOSE US (BENTO GRID) ── */}
+      <section className="py-32 bg-white" ref={whyRef}>
         <div className="max-w-7xl mx-auto px-6">
-          <div className="grid lg:grid-cols-12 gap-20 items-center">
-            {/* Left Image Cluster */}
-            <div className="lg:col-span-6 relative">
-              <div 
-                className="relative z-10 rounded-[3rem] overflow-hidden aspect-[4/5] shadow-2xl"
-                style={{
-                  opacity: whyInView ? 1 : 0,
-                  transform: whyInView ? "scale(1)" : "scale(0.95)",
-                  transition: "all 1s cubic-bezier(0.16, 1, 0.3, 1)"
-                }}
-              >
-                <div className="absolute inset-0 bg-gray-200 flex items-center justify-center">
-                  <Award size={64} className="text-gray-300" />
-                </div>
-              </div>
-              {/* Floating Stat Card */}
-              <div 
-                className="absolute -bottom-10 -right-10 z-20 p-8 bg-[#550000] rounded-3xl shadow-2xl text-white space-y-2"
-                style={{
-                   opacity: whyInView ? 1 : 0,
-                   transform: whyInView ? "translateY(0)" : "translateY(40px)",
-                   transition: "all 1s cubic-bezier(0.16, 1, 0.3, 1) 0.3s"
-                }}
-              >
-                <div className="text-4xl font-black">15+</div>
-                <div className="text-[10px] font-bold uppercase tracking-widest text-[#c9a84c]">Years of Craftsmanship</div>
-              </div>
-            </div>
-
-            {/* Right Content */}
-            <div className="lg:col-span-6 space-y-12">
-              <div className="space-y-4">
-                 <span className="text-[10px] font-black tracking-[0.3em] uppercase text-[#c9a84c]">Authentic Excellence</span>
-                 <h2 className="text-4xl md:text-5xl font-black text-gray-900 leading-tight">Beyond a Simple <br/>Travel Agency</h2>
-                 <p className="text-gray-500 text-lg leading-relaxed">We don&apos;t just book hotels; we architect memories. Every detail is hand-picked to ensure your journey reflects the elegance of Sri Lanka.</p>
-              </div>
-
-              <div className="grid gap-8">
-                {whyUs.map((item, i) => (
-                  <div 
-                    key={item.title} 
-                    className="flex gap-6 items-start group"
-                    style={{
+           <div className="flex flex-col gap-6">
+              
+              {/* Row 1: Intro & Stat */}
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                 {/* Main Title Block */}
+                 <div 
+                   className="lg:col-span-2 bg-[#fafafa] rounded-[3rem] p-12 md:p-16 flex flex-col justify-center border border-gray-100 hover:shadow-[0_20px_50px_rgba(0,0,0,0.03)] transition-all duration-700"
+                   style={{
                       opacity: whyInView ? 1 : 0,
-                      transform: whyInView ? "translateX(0)" : "translateX(30px)",
-                      transition: `all 0.8s cubic-bezier(0.16, 1, 0.3, 1) ${0.4 + i * 0.15}s`
-                    }}
-                  >
-                    <div className="w-14 h-14 shrink-0 rounded-2xl bg-gray-50 flex items-center justify-center text-3xl transition-transform group-hover:scale-110">
-                      {item.icon}
-                    </div>
-                    <div className="space-y-1">
-                      <h4 className="font-black text-gray-900 group-hover:text-[#550000] transition-colors">{item.title}</h4>
-                      <p className="text-gray-500 text-sm leading-relaxed">{item.description}</p>
-                    </div>
-                  </div>
-                ))}
+                      transform: whyInView ? "translateY(0)" : "translateY(40px)",
+                      transition: "all 0.8s cubic-bezier(0.16, 1, 0.3, 1)"
+                   }}
+                 >
+                    <span className="text-[10px] font-black tracking-[0.4em] uppercase text-[#c9a84c] mb-6">Authentic Excellence</span>
+                    <h2 className="text-4xl md:text-6xl font-black text-gray-900 leading-[1.1] mb-6">Beyond a Simple <br/>Travel Agency</h2>
+                    <p className="text-gray-500 text-lg md:text-xl leading-relaxed max-w-2xl">We don&apos;t just book hotels; we architect memories. Every detail is hand-picked to ensure your journey reflects the pure elegance of Sri Lanka.</p>
+                 </div>
+
+                 {/* Stat Block */}
+                 <div 
+                   className="bg-gradient-to-br from-[#550000] to-[#2a0000] rounded-[3rem] p-12 text-center flex flex-col items-center justify-center text-white relative overflow-hidden group hover:shadow-[0_20px_50px_rgba(85,0,0,0.3)] transition-all duration-700"
+                   style={{
+                      opacity: whyInView ? 1 : 0,
+                      transform: whyInView ? "translateY(0)" : "translateY(40px)",
+                      transition: "all 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.15s"
+                   }}
+                 >
+                    <div className="absolute inset-0 bg-[#000000] opacity-0 group-hover:opacity-20 transition-opacity duration-1000" />
+                    <div className="relative z-10 text-6xl md:text-8xl font-black mb-4 group-hover:text-[#c9a84c] transition-colors duration-500">15+</div>
+                    <div className="relative z-10 text-[10px] md:text-xs font-black uppercase tracking-[0.3em] text-[#c9a84c] group-hover:text-white transition-colors duration-500">Years of Craftsmanship</div>
+                 </div>
               </div>
-            </div>
+
+              {/* Row 2: Features Grid */}
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                 {/* Feature 1 */}
+                 <div 
+                   className="bg-white rounded-[3rem] p-10 border border-gray-100 hover:shadow-[0_20px_50px_rgba(0,0,0,0.06)] hover:-translate-y-2 transition-all duration-500 flex flex-col justify-center"
+                   style={{
+                      opacity: whyInView ? 1 : 0,
+                      transform: whyInView ? "translateY(0)" : "translateY(40px)",
+                      transition: "all 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.3s"
+                   }}
+                 >
+                    <div className="w-14 h-14 shrink-0 rounded-2xl bg-gray-50 flex items-center justify-center text-3xl mb-6">{whyUs[0].icon}</div>
+                    <h4 className="font-black text-xl text-gray-900 mb-3">{whyUs[0].title}</h4>
+                    <p className="text-gray-500 text-sm leading-relaxed">{whyUs[0].description}</p>
+                 </div>
+
+                 {/* Centerpiece Logo */}
+                 <div 
+                   className="lg:col-span-2 md:col-span-2 rounded-[3rem] overflow-hidden bg-gray-50 relative group border border-gray-100 min-h-[300px]"
+                   style={{
+                      opacity: whyInView ? 1 : 0,
+                      transform: whyInView ? "translateY(0)" : "translateY(40px)",
+                      transition: "all 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.45s"
+                   }}
+                 >
+                     <img src="/images/logo-a4tours.png" className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" alt="A4 Tours Logo" />
+                 </div>
+
+                 {/* Feature 2 */}
+                 <div 
+                   className="bg-white rounded-[3rem] p-10 border border-gray-100 hover:shadow-[0_20px_50px_rgba(0,0,0,0.06)] hover:-translate-y-2 transition-all duration-500 flex flex-col justify-center"
+                   style={{
+                      opacity: whyInView ? 1 : 0,
+                      transform: whyInView ? "translateY(0)" : "translateY(40px)",
+                      transition: "all 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.6s"
+                   }}
+                 >
+                    <div className="w-14 h-14 shrink-0 rounded-2xl bg-gray-50 flex items-center justify-center text-3xl mb-6">{whyUs[1].icon}</div>
+                    <h4 className="font-black text-xl text-gray-900 mb-3">{whyUs[1].title}</h4>
+                    <p className="text-gray-500 text-sm leading-relaxed">{whyUs[1].description}</p>
+                 </div>
+              </div>
+
+              {/* Row 3: Final Features */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                 {/* Feature 3 */}
+                 <div 
+                   className="bg-white rounded-[3rem] p-10 border border-gray-100 hover:shadow-[0_20px_50px_rgba(0,0,0,0.06)] hover:-translate-y-2 transition-all duration-500 flex items-center gap-8"
+                   style={{
+                      opacity: whyInView ? 1 : 0,
+                      transform: whyInView ? "translateY(0)" : "translateY(40px)",
+                      transition: "all 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.75s"
+                   }}
+                 >
+                    <div className="w-16 h-16 shrink-0 rounded-2xl bg-gray-50 flex items-center justify-center text-4xl">{whyUs[2].icon}</div>
+                    <div>
+                       <h4 className="font-black text-xl text-gray-900 mb-2">{whyUs[2].title}</h4>
+                       <p className="text-gray-500 text-sm leading-relaxed">{whyUs[2].description}</p>
+                    </div>
+                 </div>
+
+                 {/* Feature 4 */}
+                 <div 
+                   className="bg-white rounded-[3rem] p-10 border border-gray-100 hover:shadow-[0_20px_50px_rgba(0,0,0,0.06)] hover:-translate-y-2 transition-all duration-500 flex items-center gap-8"
+                   style={{
+                      opacity: whyInView ? 1 : 0,
+                      transform: whyInView ? "translateY(0)" : "translateY(40px)",
+                      transition: "all 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.9s"
+                   }}
+                 >
+                    <div className="w-16 h-16 shrink-0 rounded-2xl bg-gray-50 flex items-center justify-center text-4xl">{whyUs[3].icon}</div>
+                    <div>
+                       <h4 className="font-black text-xl text-gray-900 mb-2">{whyUs[3].title}</h4>
+                       <p className="text-gray-500 text-sm leading-relaxed">{whyUs[3].description}</p>
+                    </div>
+                 </div>
+              </div>
+
+           </div>
+        </div>
+      </section>
+
+      {/* ── BEACH PARALLAX ── */}
+      <section className="relative py-40 min-h-[70vh] flex items-center justify-center overflow-hidden">
+        {/* Parallax Background */}
+        <div 
+          className="absolute inset-0 bg-fixed bg-cover bg-center"
+          style={{ backgroundImage: "url('/images/beach-background.jpg')" }} // Place the user's uploaded image here
+        />
+        {/* Gradient/Dark Overlay for text readability */}
+        <div className="absolute inset-0 bg-black/40 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
+        
+        {/* Content */}
+        <div className="relative z-10 max-w-4xl mx-auto px-6 text-center text-white space-y-8">
+          <span className="text-[10px] font-black tracking-[0.4em] uppercase text-[#c9a84c] drop-shadow-md">
+            Tropical Bliss
+          </span>
+          <h2 className="text-5xl md:text-7xl font-black leading-tight drop-shadow-lg">
+            Golden Sands & <br className="hidden md:block"/> Ocean Adventures
+          </h2>
+          <p className="text-lg md:text-2xl text-white/90 leading-relaxed font-medium drop-shadow-md">
+            With over 1,340 kilometers of pristine coastline, Sri Lanka is a beach lover's ultimate paradise. 
+            From thrilling surfing in Arugam Bay and whale watching in Mirissa to snorkeling in vibrant coral reefs 
+            and simply unwinding under swaying palm trees—our shores promise unforgettable moments.
+          </p>
+          <div className="pt-8">
+             <Link href="/packages" className="btn-gold px-12 py-5 rounded-full text-base font-black shadow-2xl">
+               Discover Beach Packages <ArrowRight size={20} className="inline ml-2" />
+             </Link>
           </div>
         </div>
       </section>
