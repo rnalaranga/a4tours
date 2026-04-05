@@ -463,7 +463,7 @@ export default function HomePage() {
   return (
     <>
       {/* ── HERO ── */}
-      <section data-theme-color="#016bb5" className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      <section data-theme-color="#550000" className="relative min-h-screen flex items-center justify-center overflow-hidden">
         {/* ── Cinematic Ken Burns Slideshow ── */}
         <style dangerouslySetInnerHTML={{
           __html: `
@@ -692,7 +692,7 @@ export default function HomePage() {
                   <div className="flex flex-col gap-1">
                     <div className="flex gap-1">
                       {[...Array(5)].map((_, i) => (
-                        <svg key={i} width="20" height="20" viewBox="0 0 24 24" fill="#34e0a1"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        <svg key={i} width="20" height="20" viewBox="0 0 24 24" fill="#34e0a1"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" /></svg>
                       ))}
                     </div>
                     <span className="text-[10px] font-black uppercase tracking-widest" style={{ color: "rgba(255,255,255,0.5)" }}>out of 5.0</span>
@@ -1263,10 +1263,10 @@ export default function HomePage() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-1 md:gap-2 auto-rows-[250px] md:auto-rows-[350px]">
             {galleryItems.map((item, i) => {
               // Perfectly balanced 4x2 grid (8 cells total)
-              const spanClass = 
+              const spanClass =
                 i === 0 ? "col-span-2 row-span-1 md:col-span-2 md:row-span-1" : // Top Wide (Tea Country)
-                i === 5 ? "col-span-2 row-span-1 md:col-span-2 md:row-span-1" : // Bottom Wide (Nine Arch)
-                "col-span-1 row-span-1"; // Standard Squares (including Golden Coast)
+                  i === 5 ? "col-span-2 row-span-1 md:col-span-2 md:row-span-1" : // Bottom Wide (Nine Arch)
+                    "col-span-1 row-span-1"; // Standard Squares (including Golden Coast)
 
               return (
                 <div
