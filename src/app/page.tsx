@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import Script from "next/script";
 import {
   ArrowRight,
   Star,
@@ -412,11 +413,11 @@ export default function HomePage() {
     setTimeout(() => setHeroLoaded(true), 100);
     const testimonialTimer = setInterval(
       () => setActiveTestimonial((p) => (p + 1) % testimonials.length),
-      2000
+      3000
     );
     const slideTimer = setInterval(
       () => setHeroSlide((p) => (p + 1) % heroImages.length),
-      3000
+      4000
     );
     return () => {
       clearInterval(testimonialTimer);
@@ -659,35 +660,92 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── STATS & TRUST ── */}
-      <section data-theme-color="#ffffff" className="py-12 md:py-24 bg-white">
+      {/* ── STATS ── */}
+      <section data-theme-color="#ffffff" className="py-8 md:py-14 bg-white border-b border-gray-100">
         <div className="max-w-7xl mx-auto px-4 md:px-6">
-          <div className="border-t-0 md:border-t border-gray-100 pt-8 md:pt-16 flex flex-col lg:flex-row gap-6 md:gap-12 items-center justify-between">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-6">
+            {stats.map((s, i) => (
+              <StatCard key={s.label} stat={s} index={i} />
+            ))}
+          </div>
+        </div>
+      </section>
 
-            {/* The Number Stats */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-8 w-full lg:w-auto">
-              {stats.slice(0, 3).map((s, i) => (
-                <StatCard key={s.label} stat={s} index={i} />
-              ))}
-            </div>
+      {/* ── TRIPADVISOR HIGHLIGHT ── */}
+      <section data-theme-color="#00aa6c" className="relative py-14 md:py-20 overflow-hidden" style={{ background: "linear-gradient(135deg, #003c28 0%, #00613f 50%, #004d32 100%)" }}>
+        {/* Decorative orbs */}
+        <div className="absolute -top-24 -right-24 w-96 h-96 rounded-full opacity-10" style={{ background: "radial-gradient(circle, #34e0a1, transparent 70%)" }} />
+        <div className="absolute -bottom-24 -left-24 w-80 h-80 rounded-full opacity-10" style={{ background: "radial-gradient(circle, #34e0a1, transparent 70%)" }} />
 
-            {/* The TripAdvisor Badge */}
-            <div className="w-full lg:w-auto flex justify-center lg:justify-end lg:border-l border-gray-100 pt-4 lg:pt-0 lg:pl-12">
+        <div className="relative z-10 max-w-7xl mx-auto px-4 md:px-6">
+          <div className="flex flex-col lg:flex-row items-center gap-10 lg:gap-20">
+
+            {/* Left — Branding + Rating */}
+            <div className="flex-1 text-center lg:text-left space-y-6">
+              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-[0.3em]" style={{ background: "rgba(52,224,161,0.15)", border: "1px solid rgba(52,224,161,0.3)", color: "#34e0a1" }}>
+                Verified Reviews
+              </div>
+              <div className="space-y-2">
+                <div className="flex items-center justify-center lg:justify-start gap-3">
+                  <span className="text-6xl md:text-7xl font-black text-white leading-none">4.9</span>
+                  <div className="flex flex-col gap-1">
+                    <div className="flex gap-1">
+                      {[...Array(5)].map((_, i) => (
+                        <svg key={i} width="20" height="20" viewBox="0 0 24 24" fill="#34e0a1"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                      ))}
+                    </div>
+                    <span className="text-[10px] font-black uppercase tracking-widest" style={{ color: "rgba(255,255,255,0.5)" }}>out of 5.0</span>
+                  </div>
+                </div>
+                <p className="text-white/60 text-sm md:text-base">Based on <span className="text-white font-bold">200+</span> verified traveller reviews</p>
+              </div>
               <a
                 href="https://www.tripadvisor.com/Attraction_Review-g1500185-d3801228-Reviews-A4_Tours-Katunayake_Negombo_Western_Province.html"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group flex flex-col sm:flex-row items-center gap-6 p-6 rounded-[2rem] bg-gray-50 border border-gray-100 hover:bg-white hover:border-[#34e0a1]/30 hover:shadow-[0_20px_40px_rgba(52,224,161,0.1)] transition-all duration-500 w-full sm:w-auto text-center sm:text-left"
+                className="inline-flex items-center gap-3 px-6 py-3 rounded-full font-black text-sm uppercase tracking-widest transition-all duration-300 hover:scale-105"
+                style={{ background: "#34e0a1", color: "#003c28" }}
               >
-                <div className="space-y-1">
-                  <div className="text-3xl font-black text-gray-900 flex items-center justify-center sm:justify-start gap-1">4.9 <Star fill="#34e0a1" className="text-[#34e0a1]" size={20} /></div>
-                  <div className="text-[10px] uppercase tracking-widest font-bold text-gray-400">Excellent Reviews</div>
-                </div>
-                <div className="w-12 h-px sm:w-px sm:h-12 bg-gray-200" />
-                <div className="w-24 h-12 relative overflow-hidden group-hover:scale-105 transition-transform duration-500">
-                  <img src="/images/tripadvisor-a4tours.png" alt="A4 Tours on TripAdvisor" className="w-full h-full object-contain" />
-                </div>
+                Read All Reviews <ArrowRight size={16} />
               </a>
+            </div>
+
+            {/* Divider */}
+            <div className="hidden lg:block w-px h-48" style={{ background: "linear-gradient(to bottom, transparent, rgba(52,224,161,0.3), transparent)" }} />
+
+            {/* Right — Official TripAdvisor Widget + Badges */}
+            <div className="flex-1 flex flex-col items-center lg:items-start gap-8">
+              {/* Official Widget */}
+              <div className="w-full max-w-xs">
+                <div id="TA_cdsratingsonlynarrow431" className="TA_cdsratingsonlynarrow">
+                  <ul id="aLaIYQRb" className="TA_links rM95FZY">
+                    <li id="kjUQFz" className="SWrLhidkx3p6">
+                      <a target="_blank" rel="noopener noreferrer" href="https://www.tripadvisor.com/Attraction_Review-g1500185-d3801228-Reviews-A4_Tours-Katunayake_Negombo_Western_Province.html">
+                        <img src="https://www.tripadvisor.com/img/cdsi/img2/branding/v2/Tripadvisor_lockup_horizontal_secondary_registered-18034-2.svg" alt="TripAdvisor" className="h-10 w-auto" />
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+                <Script
+                  src="https://www.jscache.com/wejs?wtype=cdsratingsonlynarrow&uniq=431&locationId=3801228&lang=en_US&border=true&display_version=2"
+                  strategy="lazyOnload"
+                  data-loadtrk
+                />
+              </div>
+
+              {/* Award badges row */}
+              <div className="flex flex-wrap gap-4 justify-center lg:justify-start">
+                {[
+                  { label: "Travelers\u2019 Choice", year: "2024" },
+                  { label: "Certificate of", year: "Excellence" },
+                  { label: "Top Rated", year: "Sri Lanka" },
+                ].map((badge) => (
+                  <div key={badge.label} className="flex flex-col items-center justify-center w-24 h-24 rounded-2xl text-center" style={{ background: "rgba(52,224,161,0.08)", border: "1px solid rgba(52,224,161,0.2)" }}>
+                    <div className="text-[10px] font-black uppercase tracking-wider leading-tight" style={{ color: "#34e0a1" }}>{badge.label}</div>
+                    <div className="text-white font-black text-sm mt-1">{badge.year}</div>
+                  </div>
+                ))}
+              </div>
             </div>
 
           </div>
