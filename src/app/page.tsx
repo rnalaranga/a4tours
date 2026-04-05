@@ -174,14 +174,20 @@ const galleryItems = [
 ];
 
 const travelerMemories = [
-  "/images/memory-1.jpg",
-  "/images/memory-2.jpg",
-  "/images/memory-3.jpg",
-  "/images/memory-4.jpg",
-  "/images/memory-5.jpg",
-  "/images/memory-6.jpg",
-  "/images/memory-7.jpg",
-  "/images/memory-8.jpg",
+  "/images/a4tours-happy_traveller1.jpg",
+  "/images/a4tours-happy_traveller2.jpg",
+  "/images/a4tours-happy_traveller3.jpg",
+  "/images/a4tours-happy_traveller4.jpg",
+  "/images/a4tours-happy_traveller5.jpg",
+  "/images/a4tours-happy_traveller6.jpg",
+  "/images/a4tours-happy_traveller7.jpg",
+  "/images/a4tours-happy_traveller8.jpg",
+  "/images/a4tours-happy_traveller9.jpg",
+  "/images/a4tours-happy_traveller10.jpg",
+  "/images/a4tours-happy_traveller11.jpg",
+  "/images/a4tours-happy_traveller12.jpg",
+  "/images/a4tours-happy_traveller13.jpg",
+  "/images/a4tours-happy_traveller14.jpg",
 ];
 
 const topDestinations = [
@@ -921,14 +927,14 @@ export default function HomePage() {
 
         <div className="relative z-10 max-w-7xl mx-auto px-6 mb-16 flex flex-col md:flex-row md:items-end justify-between gap-6">
           <div className="space-y-4">
-            <span className="text-[10px] font-black tracking-[0.4em] uppercase text-[#c9a84c]">Smiles & Stories</span>
+            <span className="text-[10px] font-black tracking-[0.4em] uppercase text-[#c9a84c]">Smiles &amp; Stories</span>
             <h2 className="text-4xl md:text-5xl font-black text-white">Traveller Memories</h2>
           </div>
           <p className="text-white/50 max-w-sm text-sm">Real moments captured by our guests. Join our growing family of explorers.</p>
         </div>
 
-        {/* Marquee Container */}
-        <div className="relative w-full overflow-hidden flex pb-8">
+        {/* Single-row Marquee */}
+        <div className="relative w-full overflow-hidden pb-4">
           <style dangerouslySetInnerHTML={{
             __html: `
                @keyframes marquee {
@@ -938,40 +944,53 @@ export default function HomePage() {
                .animate-marquee {
                   display: flex;
                   width: max-content;
-                  animation: marquee 40s linear infinite;
+                  animation: marquee 50s linear infinite;
                }
                .animate-marquee:hover {
                   animation-play-state: paused;
                }
+               .memory-img {
+                  filter: saturate(1.12) contrast(1.05) brightness(1.02);
+                  transition: filter 0.6s ease, transform 2s ease;
+               }
+               .memory-card:hover .memory-img {
+                  filter: saturate(1.2) contrast(1.07) brightness(1.04);
+               }
             `}} />
 
-          {/* The fading edges for smooth illusion */}
-          <div className="absolute top-0 left-0 w-32 md:w-64 h-full bg-gradient-to-r from-[#111111] to-transparent z-20 pointer-events-none" />
-          <div className="absolute top-0 right-0 w-32 md:w-64 h-full bg-gradient-to-l from-[#111111] to-transparent z-20 pointer-events-none" />
+          {/* Fading edges */}
+          <div className="absolute top-0 left-0 w-24 md:w-48 h-full bg-gradient-to-r from-[#111111] to-transparent z-20 pointer-events-none" />
+          <div className="absolute top-0 right-0 w-24 md:w-48 h-full bg-gradient-to-l from-[#111111] to-transparent z-20 pointer-events-none" />
 
-          <div className="animate-marquee gap-6 px-3">
-            {/* We render the list twice to create the infinite loop effect seamlessly */}
+          <div className="animate-marquee gap-5 px-3">
             {[...travelerMemories, ...travelerMemories].map((img, index) => (
               <div
                 key={index}
-                className="relative w-72 md:w-96 aspect-[4/5] rounded-[2.5rem] overflow-hidden shrink-0 group border border-white/5 grayscale-[0.5] hover:grayscale-0 transition-all duration-700 hover:shadow-[0_0_40px_rgba(201,168,76,0.15)] cursor-pointer"
+                className="memory-card relative w-72 md:w-88 aspect-[4/5] rounded-[2rem] overflow-hidden shrink-0 group cursor-pointer"
+                style={{ boxShadow: "0 8px 40px rgba(0,0,0,0.45)", border: "1px solid rgba(255,255,255,0.07)" }}
               >
-                {/* Temporary placeholder logic if img is missing */}
-                <div className="absolute inset-0 bg-[#222222] -z-20 flex items-center justify-center">
-                  <Compass size={48} className="text-white opacity-5" />
-                </div>
+                <div className="absolute inset-0 bg-[#1a1208] -z-20" />
                 <img
-                  src={"/images/a4tours-happy_traveller1.jpg"}
-                  alt={`Traveler Memory ${index + 1}`}
-                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-[2s] group-hover:scale-110"
+                  src={img}
+                  alt={`Traveler Memory ${(index % travelerMemories.length) + 1}`}
+                  className="memory-img absolute inset-0 w-full h-full object-cover group-hover:scale-105"
                 />
-                {/* Overlay */}
-                <div className="absolute inset-0 bg-[#c9a84c]/20 mix-blend-overlay opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#111111]/90 via-[#111111]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-8">
-                  <div className="inline-flex items-center gap-2 text-[10px] font-black uppercase text-white tracking-widest bg-white/10 backdrop-blur-md px-4 py-2 rounded-full w-max">
+                {/* Subtle warm tint — always present */}
+                <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#0d0805]/60 pointer-events-none" />
+                {/* Hover: reveal tag */}
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0d0805]/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-7">
+                  <div
+                    className="inline-flex items-center gap-2 text-[10px] font-black uppercase text-white tracking-widest px-4 py-2 rounded-full w-max"
+                    style={{ background: "rgba(201,168,76,0.2)", backdropFilter: "blur(8px)", border: "1px solid rgba(201,168,76,0.3)" }}
+                  >
                     #A4ToursFamily
                   </div>
                 </div>
+                {/* Gold border shimmer on hover */}
+                <div
+                  className="absolute inset-0 rounded-[2rem] opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+                  style={{ boxShadow: "inset 0 0 0 1px rgba(201,168,76,0.4)" }}
+                />
               </div>
             ))}
           </div>
