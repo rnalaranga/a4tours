@@ -18,24 +18,24 @@ const contactInfo = [
   {
     icon: Phone,
     title: "Call Us",
-    value: "+94 77 123 4567",
-    sub: "+94 11 234 5678",
-    href: "tel:+94771234567",
+    value: "+94 773590075",
+    sub: "Direct Line",
+    href: "tel:+94773590075",
     color: "#550000",
   },
   {
     icon: Mail,
     title: "Email Us",
-    value: "info@a4tours.lk",
-    sub: "bookings@a4tours.lk",
-    href: "mailto:info@a4tours.lk",
+    value: "to@a4tours.net",
+    sub: "Primary Email",
+    href: "mailto:to@a4tours.net",
     color: "#c9a84c",
   },
   {
     icon: MapPin,
     title: "Visit Us",
-    value: "No. 42, Galle Road",
-    sub: "Colombo 03, Sri Lanka",
+    value: "No 636 Liyanagemulla",
+    sub: "Seeduwa Sri Lanka",
     href: "#map",
     color: "#550000",
   },
@@ -332,7 +332,7 @@ export default function ContactPage() {
                 <div className="text-center">
                   <MapPin size={40} className="text-[#550000] opacity-30 mb-2" />
                   <p className="text-sm text-gray-400 opacity-70">Google Map Embed</p>
-                  <p className="text-xs text-gray-400 opacity-50">No. 42, Galle Road, Colombo 03</p>
+                  <p className="text-xs text-gray-400 opacity-50">No 636 Liyanagemulla Seeduwa</p>
                 </div>
               </div>
 
@@ -346,7 +346,7 @@ export default function ContactPage() {
                   Our team is available 7 days a week to answer your questions and help you plan the perfect trip.
                 </p>
                 <a
-                  href="tel:+94771234567"
+                  href="tel:+94773590075"
                   className="flex items-center gap-3 p-3 rounded-xl mb-3 transition-all hover:opacity-90"
                   style={{ background: "rgba(255,255,255,0.1)" }}
                 >
@@ -355,11 +355,11 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <div className="text-white font-semibold text-sm">Call Us Now</div>
-                    <div className="text-white/60 text-xs">+94 77 123 4567</div>
+                    <div className="text-white/60 text-xs">+94 773590075</div>
                   </div>
                 </a>
                 <a
-                  href="mailto:info@a4tours.lk"
+                  href="mailto:to@a4tours.net"
                   className="flex items-center gap-3 p-3 rounded-xl transition-all hover:opacity-90"
                   style={{ background: "rgba(255,255,255,0.1)" }}
                 >
@@ -368,7 +368,7 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <div className="text-white font-semibold text-sm">Email Us</div>
-                    <div className="text-white/60 text-xs">info@a4tours.lk</div>
+                    <div className="text-white/60 text-xs">to@a4tours.net</div>
                   </div>
                 </a>
               </div>

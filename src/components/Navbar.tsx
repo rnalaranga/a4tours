@@ -65,7 +65,7 @@ export default function Navbar() {
             );
           })}
           <a
-            href="tel:+94771234567"
+            href="tel:+94773590075"
             className="flex items-center gap-2 px-5 py-2.5 rounded-full font-semibold text-sm transition-all duration-300 hover:scale-105"
             style={{
               background:
@@ -112,7 +112,7 @@ export default function Navbar() {
             );
           })}
           <a
-            href="tel:+94771234567"
+            href="tel:+94773590075"
             className="btn-primary mt-2 justify-center"
           >
             <Phone size={14} />

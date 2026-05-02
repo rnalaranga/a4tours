@@ -175,24 +175,24 @@ export default function Footer() {
           <ul className="space-y-4">
             <li className="flex items-start gap-3 text-white/60 text-sm">
               <MapPin size={16} className="text-[#c9a84c] mt-0.5 shrink-0" />
-              No. 42, Galle Road, Colombo 03, Sri Lanka
+              No 636 Liyanagemulla Seeduwa Sri Lanka
             </li>
             <li>
               <a
-                href="tel:+94771234567"
+                href="tel:+94773590075"
                 className="flex items-center gap-3 text-white/60 hover:text-white text-sm transition-colors"
               >
                 <Phone size={16} className="text-[#c9a84c] shrink-0" />
-                +94 77 123 4567
+                +94 773590075
               </a>
             </li>
             <li>
               <a
-                href="mailto:info@a4tours.lk"
+                href="mailto:to@a4tours.net"
                 className="flex items-center gap-3 text-white/60 hover:text-white text-sm transition-colors"
               >
                 <Mail size={16} className="text-[#c9a84c] shrink-0" />
-                info@a4tours.lk
+                to@a4tours.net
               </a>
             </li>
           </ul>
